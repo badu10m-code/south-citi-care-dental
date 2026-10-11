@@ -24,8 +24,8 @@
     <!-- step 1: secret code -->
     <form id="step-code" class="auth-step">
       <label for="auth-code">Secret access code</label>
-      <input type="password" id="auth-code" placeholder="Enter secret code"
-             autocomplete="off" spellcheck="false" required>
+      <input type="text" id="auth-code" placeholder="Enter secret code"
+             autocomplete="off" autocapitalize="off" spellcheck="false" required>
       <button type="submit" class="btn btn-block" id="btn-unlock">Unlock panel</button>
       <p class="auth-note">Only the clinic owner has this code. The first correct entry registers this device, and from then on the panel opens directly here.</p>
       <div class="error" id="err-code"></div>

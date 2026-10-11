@@ -69,6 +69,7 @@ body.admin-body { margin: 0; }
   letter-spacing: .04em;
 }
 #auth-otp, #auth-code {
+  -webkit-text-security: disc;
   width: 100%;
   box-sizing: border-box;
   border: 1.5px solid #BAE6FD;
