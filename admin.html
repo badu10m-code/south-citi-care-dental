@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/admin.css?v=46">
+<link rel="stylesheet" href="css/admin.css?v=48">
 </head>
 <body class="admin-body">
 
@@ -83,10 +83,25 @@
   </main>
 </div>
 
-<script src="config.js?v=46"></script>
-<script src="js/store.js?v=46"></script>
-<script src="js/auth.js?v=46"></script>
+<script src="config.js?v=48"></script>
+<script src="js/store.js?v=48"></script>
+<script src="js/auth.js?v=48"></script>
 <script src="js/main.js"></script>
-<script src="js/admin.js?v=46"></script>
+<script src="js/admin.js?v=48"></script>
+
+<div class="modal" id="clock-modal" hidden>
+  <div class="modal-card">
+    <h3>Set appointment time</h3>
+    <div class="clock-step" id="clock-step">Pick hour</div>
+    <div class="clock-preview"><b id="clock-val">--:--</b><span class="ap-toggle"><button type="button" id="ap-am" class="active">AM</button><button type="button" id="ap-pm">PM</button></span></div>
+    <div class="clock-face" id="clock-face"></div>
+    <div class="quick-slots" id="quick-slots"></div>
+    <div class="modal-btns">
+      <button type="button" class="btn btn-outline btn-sm" id="clock-clear">Clear</button>
+      <button type="button" class="btn btn-outline btn-sm" id="clock-cancel">Cancel</button>
+      <button type="button" class="btn btn-primary btn-sm" id="clock-save">Save</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>

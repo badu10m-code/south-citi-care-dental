@@ -17,6 +17,37 @@ function esc(s) {
   });
 }
 
+function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
+function parseSlot(str) {
+  var m = String(str || '').match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+  if (!m) return null;
+  return { h: parseInt(m[1], 10), m: parseInt(m[2], 10), ap: m[3].toUpperCase() };
+}
+
+function fmtDate(d) {
+  var dt = new Date(String(d || '') + 'T00:00:00');
+  if (isNaN(dt)) return String(d || '');
+  return dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function waPhoneOf(a) {
+  return String(a.phone || '').replace(/\D/g, '').slice(-10);
+}
+
+function confirmMsg(a) {
+  return 'Hello ' + a.name + ',\n\n' +
+    'Your appointment at South Citi Care Dental Clinic is confirmed for ' +
+    fmtDate(a.date) + ' at ' + a.slot + '.\n' +
+    'Ref: ' + a.id + '\n' +
+    'Address: 23B/40/1A, near Punjab National Bank, Mani Aangan, Block B, New Alipore, Kolkata 700053.\n' +
+    'Please arrive 10 minutes early. Reply here if you need to change the time.\n\n' +
+    'South Citi Care Dental Clinic';
+}
+
+// clock picker state
+var clock = null; // { id, hour, minute, ap, mode }
+
 document.addEventListener('DOMContentLoaded', function () {
   var authScreen = document.getElementById('auth-screen');
   var panel = document.getElementById('admin-panel');
@@ -78,14 +109,18 @@ document.addEventListener('DOMContentLoaded', function () {
             '<span class="appt-ref mono">' + esc(a.id) + '</span>' +
             '<span class="pill ' + esc(a.status) + '">' + esc(a.status) + '</span></div>' +
           '<div class="appt-meta">' +
-            '<a href="tel:' + esc(a.phone) + '">' + esc(a.phone) + '</a> &middot; ' + esc(a.service) +
+            '<a href="tel:' + esc(a.phone) + '">' + esc(a.phone) + '</a> <span class="wa-num">(WhatsApp)</span> &middot; ' + esc(a.service) +
             ' &middot; <b>' + esc(a.date) + '</b>' + (a.time ? ' at ' + esc(a.time) : '') +
             (a.message ? '<div class="notes">&ldquo;' + esc(a.message) + '&rdquo;</div>' : '') +
           '</div>' +
         '</div>' +
         '<div class="appt-actions">' +
+          '<button type="button" class="slot-btn' + (a.slot ? ' set' : '') + '" data-slot>' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' +
+            (a.slot ? esc(a.slot) : 'Set time') + '</button>' +
           '<a class="btn btn-outline btn-sm" href="tel:' + esc(a.phone) + '">Call</a>' +
-          '<a class="btn btn-outline btn-sm" href="https://wa.me/91' + waPhone + '" target="_blank" rel="noopener">WhatsApp</a>' +
+          '<a class="btn btn-outline btn-sm" href="https://wa.me/91' + waPhone + '" target="_blank" rel="noopener">Chat</a>' +
+          '<a class="btn btn-sm wa-confirm' + (a.slot ? '' : ' disabled') + '" data-wa>Confirm on WhatsApp</a>' +
           '<select class="status-sel">' +
             ['new', 'confirmed', 'completed', 'cancelled'].map(function (s) {
               return '<option value="' + s + '"' + (a.status === s ? ' selected' : '') + '>' + s + '</option>';
@@ -107,8 +142,112 @@ document.addEventListener('DOMContentLoaded', function () {
         current = current.filter(function (x) { return x.id !== id; });
         persist();
       });
+      var slotBtn = card.querySelector('[data-slot]');
+      if (slotBtn) slotBtn.addEventListener('click', function () { openClock(id); });
+      var waBtn = card.querySelector('[data-wa]');
+      if (waBtn) waBtn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        var ap = current.find(function (x) { return x.id === id; });
+        if (!ap) return;
+        if (!ap.slot) { alert('Set the time slot first, then the WhatsApp draft is ready.'); openClock(id); return; }
+        var url = 'https://wa.me/91' + waPhoneOf(ap) + '?text=' + encodeURIComponent(confirmMsg(ap));
+        window.open(url, '_blank', 'noopener');
+      });
     });
   }
+
+  // ===== clock picker =====
+  var modal = document.getElementById('clock-modal');
+  var face = document.getElementById('clock-face');
+  var stepEl = document.getElementById('clock-step');
+  var valEl = document.getElementById('clock-val');
+
+  function openClock(id) {
+    var a = current.find(function (x) { return x.id === id; });
+    if (!a) return;
+    var p = parseSlot(a.slot) || { h: null, m: null, ap: 'AM' };
+    clock = { id: id, hour: p.h, minute: p.m, ap: p.ap, mode: 'h' };
+    drawFace();
+    paint();
+    modal.hidden = false;
+  }
+
+  function drawFace() {
+    face.innerHTML = '';
+    var c = document.createElement('span');
+    c.className = 'clock-center';
+    face.appendChild(c);
+    var items = [];
+    if (clock.mode === 'h') {
+      stepEl.textContent = 'Pick hour';
+      for (var i = 1; i <= 12; i++) items.push({ label: String(i), value: i });
+    } else {
+      stepEl.textContent = 'Pick minutes';
+      for (var j = 0; j < 12; j++) items.push({ label: pad2(j * 5), value: j * 5 });
+    }
+    items.forEach(function (it, idx) {
+      var ang = (idx * 30 - 90) * Math.PI / 180;
+      var x = 50 + 42 * Math.cos(ang);
+      var y = 50 + 42 * Math.sin(ang);
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'clock-num';
+      b.style.left = x + '%';
+      b.style.top = y + '%';
+      b.textContent = it.label;
+      var sel = (clock.mode === 'h') ? (clock.hour === it.value) : (clock.minute === it.value);
+      if (sel) b.classList.add('sel');
+      b.addEventListener('click', function () {
+        if (clock.mode === 'h') { clock.hour = it.value; clock.mode = 'm'; }
+        else { clock.minute = it.value; }
+        drawFace();
+        paint();
+      });
+      face.appendChild(b);
+    });
+  }
+
+  function paint() {
+    var h = (clock.hour === null || clock.hour === undefined) ? '--' : String(clock.hour);
+    var m = (clock.minute === null || clock.minute === undefined) ? '--' : pad2(clock.minute);
+    valEl.textContent = h + ':' + m;
+    document.getElementById('ap-am').classList.toggle('active', clock.ap === 'AM');
+    document.getElementById('ap-pm').classList.toggle('active', clock.ap === 'PM');
+  }
+
+  document.getElementById('ap-am').addEventListener('click', function () { if (clock) { clock.ap = 'AM'; paint(); } });
+  document.getElementById('ap-pm').addEventListener('click', function () { if (clock) { clock.ap = 'PM'; paint(); } });
+  document.getElementById('clock-cancel').addEventListener('click', function () { modal.hidden = true; clock = null; });
+  document.getElementById('clock-clear').addEventListener('click', function () {
+    var a = current.find(function (x) { return x.id === clock.id; });
+    if (a) { delete a.slot; persist(); }
+    modal.hidden = true; clock = null;
+  });
+  document.getElementById('clock-save').addEventListener('click', function () {
+    if (!clock || clock.hour === null || clock.hour === undefined || clock.minute === null || clock.minute === undefined) {
+      alert('Pick an hour and the minutes first.');
+      return;
+    }
+    var a = current.find(function (x) { return x.id === clock.id; });
+    if (a) {
+      a.slot = clock.hour + ':' + pad2(clock.minute) + ' ' + clock.ap;
+      persist();
+    }
+    modal.hidden = true; clock = null;
+  });
+
+  // owner quick slots (clinic hours 9:30 AM to 9:30 PM)
+  var QUICK = ['10:00 AM', '11:00 AM', '12:00 PM', '5:00 PM', '6:30 PM', '8:00 PM'];
+  var qs = document.getElementById('quick-slots');
+  qs.innerHTML = QUICK.map(function (t) { return '<button type="button" data-t="' + t + '">' + t + '</button>'; }).join('');
+  qs.addEventListener('click', function (ev) {
+    var t = ev.target.getAttribute('data-t');
+    if (!t || !clock) return;
+    var p = parseSlot(t);
+    var a = current.find(function (x) { return x.id === clock.id; });
+    if (a) { a.slot = t; persist(); }
+    modal.hidden = true; clock = null;
+  });
 
   function persist() {
     render();
@@ -117,9 +256,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function exportCSV() {
-    var head = 'Ref,Name,Phone,Service,Date,Time,Status,Notes,Created\n';
+    var head = 'Ref,Name,Phone,Service,Date,Slot,Preferred time,Status,Notes,Created\n';
     var body = current.map(function (a) {
-      return [a.id, a.name, a.phone, a.service, a.date, a.time, a.status, a.message, a.created]
+      return [a.id, a.name, a.phone, a.service, a.date, a.slot, a.time, a.status, a.message, a.created]
         .map(function (v) { return '"' + String(v || '').replace(/"/g, '""') + '"'; }).join(',');
     }).join('\n');
     var blob = new Blob([head + body], { type: 'text/csv' });
