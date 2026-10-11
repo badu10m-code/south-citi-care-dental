@@ -27,8 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
       localStorage.setItem('scc_appointments', JSON.stringify(all));
     } catch (e) {}
 
-    // cloud store: append while keeping every other key in the bin
-    binSave({ appointments: (existingAppointments().concat([appt])) });
+    // cloud store: append while keeping every other key in the bin (best effort)
+    existingAppointments().then(function (all) {
+      binSave({ appointments: all.concat([appt]) });
+    });
 
     form.style.display = 'none';
     var ok = document.getElementById('form-success');
