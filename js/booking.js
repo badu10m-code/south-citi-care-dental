@@ -27,20 +27,18 @@ document.addEventListener('DOMContentLoaded', function () {
       localStorage.setItem('scc_appointments', JSON.stringify(all));
     } catch (e) {}
 
-    // cloud store: read, append, write
-    fetch(STORE_URL).then(function (r) { return r.json(); }).then(function (data) {
-      var list = (data && data.appointments) ? data.appointments : [];
-      list.push(appt);
-      return fetch(STORE_URL, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ appointments: list })
-      });
-    }).catch(function () {});
+    // cloud store: append while keeping every other key in the bin
+    binSave({ appointments: (existingAppointments().concat([appt])) });
 
     form.style.display = 'none';
     var ok = document.getElementById('form-success');
     ok.classList.add('show');
     document.getElementById('ok-ref').textContent = appt.id;
   });
+
+  function existingAppointments() {
+    return fetch(STORE_URL).then(function (r) { return r.json(); })
+      .then(function (d) { return (d && d.appointments) ? d.appointments : []; })
+      .catch(function () { return []; });
+  }
 });
