@@ -21,26 +21,14 @@
       <p class="auth-sub">Staff login &middot; Appointments dashboard</p>
     </div>
 
-    <!-- step 1: email -->
-    <form id="step-email" class="auth-step">
-      <label for="auth-email">Registered Gmail address</label>
-      <input type="email" id="auth-email" placeholder="you@gmail.com"
-             autocomplete="email" spellcheck="false" required>
-      <button type="submit" class="btn btn-block" id="btn-send">Send code</button>
-      <p class="auth-note">Only the registered clinic Gmail can access this panel. The 6-digit code arrives in that same inbox.</p>
-      <div class="error" id="err-email"></div>
-    </form>
-
-    <!-- step 2: otp -->
-    <form id="step-otp" class="auth-step" hidden>
-      <label for="auth-otp">Enter the 6-digit code</label>
-      <input type="text" id="auth-otp" inputmode="numeric" maxlength="6" required
-             placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="one-time-code">
-      <p class="otp-sent">Code sent to <b>+91 <span id="otp-mask"></span></b> <span class="sub">(email inbox)</span></p>
-      <button type="submit" class="btn btn-block" id="btn-verify">Verify &amp; open panel</button>
-      <button type="button" class="btn-ghost" id="btn-resend" disabled>Resend code in 30s</button>
-      <button type="button" class="btn-ghost muted" id="btn-change">&larr; Change email</button>
-      <div class="error" id="err-otp"></div>
+    <!-- step 1: secret code -->
+    <form id="step-code" class="auth-step">
+      <label for="auth-code">Secret access code</label>
+      <input type="password" id="auth-code" placeholder="Enter secret code"
+             autocomplete="off" spellcheck="false" required>
+      <button type="submit" class="btn btn-block" id="btn-unlock">Unlock panel</button>
+      <p class="auth-note">Only the clinic owner has this code. The first correct entry registers this device, and from then on the panel opens directly here.</p>
+      <div class="error" id="err-code"></div>
     </form>
 
     <button type="button" class="forget" id="forget-device" hidden>Forget this device &amp; register again</button>
@@ -59,7 +47,7 @@
     </div>
     <div class="topbar-user">
       <span class="badge-owner">Owner</span>
-      <span class="mono" id="user-email">brajasantra36@gmail.com</span>
+      <span class="mono">Owner access</span>
       <button id="logout" class="btn btn-outline btn-sm">Log out</button>
     </div>
   </header>

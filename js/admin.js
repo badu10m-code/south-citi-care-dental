@@ -1,4 +1,4 @@
-// Appointments dashboard. Entry is controlled by js/auth.js (owner OTP).
+// Appointments dashboard. Entry is controlled by js/auth.js (owner secret code).
 var current = [];
 var activeFilter = 'all';
 
@@ -24,18 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // registered device: straight into the panel, no code needed
   var device = (typeof ownerDevice === 'function') ? ownerDevice() : null;
-  if (device && device.email && sessionStorage.getItem('scc_session') === '1') enter();
-  else if (device && device.email) {
-    // trusted device but a previous logout: restore session instantly too
-    sessionStorage.setItem('scc_session', '1');
-    enter();
-  } else initAuth();
+  if (device && device.token) enter();
+  else initAuth();
 
   function enter() {
     authScreen.hidden = true;
-    document.getElementById('forget-device').hidden = true;
     panel.hidden = false;
-    document.getElementById('user-email').textContent = device ? device.email : '';
     load();
   }
 
@@ -135,107 +129,44 @@ document.addEventListener('DOMContentLoaded', function () {
     a.click();
   }
 
-  // ===== auth screen wiring =====
+  // ===== secret-code screen =====
   function initAuth() {
     panel.hidden = true;
     authScreen.hidden = false;
-    var stepPhone = document.getElementById('step-email');
-    var stepOtp = document.getElementById('step-otp');
-    var phoneEl = document.getElementById('auth-email');
-    var otpEl = document.getElementById('auth-otp');
-    var errPhone = document.getElementById('err-email');
-    var errOtp = document.getElementById('err-otp');
-    var btnSend = document.getElementById('btn-send');
-    var btnVerify = document.getElementById('btn-verify');
-    var btnResend = document.getElementById('btn-resend');
-    var loginPhone = '';
+    var codeEl = document.getElementById('auth-code');
+    var errCode = document.getElementById('err-code');
+    var btnUnlock = document.getElementById('btn-unlock');
+    codeEl.value = '';
+    errCode.classList.remove('show');
 
-    stepOtp.hidden = true;
-    stepPhone.hidden = false;
-    errPhone.classList.remove('show');
-    errOtp.classList.remove('show');
-
-    stepPhone.addEventListener('submit', function (ev) {
+    document.getElementById('step-code').addEventListener('submit', function (ev) {
       ev.preventDefault();
-      errPhone.classList.remove('show');
-      btnSend.disabled = true;
-      btnSend.textContent = 'Sending&hellip;'.replace('&hellip;', '...');
-      sendOwnerOtp(phoneEl.value).then(function (res) {
-        btnSend.disabled = false;
-        btnSend.textContent = 'Send code';
-        if (!res.ok) { errPhone.textContent = res.error; errPhone.classList.add('show'); return; }
-        loginPhone = res.email;
-      }).catch(function () {
-        btnSend.disabled = false;
-        btnSend.textContent = 'Send code';
-        errPhone.textContent = 'Something went wrong starting the login. Try again.';
-        errPhone.classList.add('show');
-      }).then(function () {
-        if (!loginPhone) return;
-        document.getElementById('otp-mask').textContent = loginPhone;
-        stepPhone.hidden = true;
-        stepOtp.hidden = false;
-        startCooldown();
-        setTimeout(function () { otpEl.focus(); }, 50);
-      });
-    });
-
-    stepOtp.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      errOtp.classList.remove('show');
-      btnVerify.disabled = true;
-      btnVerify.textContent = 'Checking...';
-      verifyOwnerOtp(loginPhone, otpEl.value).then(function (res) {
-        btnVerify.disabled = false;
-        btnVerify.textContent = 'Verify & open panel';
-        if (!res.ok) { errOtp.textContent = res.error; errOtp.classList.add('show'); return; }
-        device = ownerDevice();
+      errCode.classList.remove('show');
+      btnUnlock.disabled = true;
+      btnUnlock.textContent = 'Checking...';
+      unlockWithCode(codeEl.value).then(function (res) {
+        btnUnlock.disabled = false;
+        btnUnlock.textContent = 'Unlock panel';
+        if (!res.ok) { errCode.textContent = res.error; errCode.classList.add('show'); return; }
         enter();
+      }).catch(function () {
+        btnUnlock.disabled = false;
+        btnUnlock.textContent = 'Unlock panel';
+        errCode.textContent = 'Something went wrong. Try again.';
+        errCode.classList.add('show');
       });
     });
-
-    btnResend.addEventListener('click', function () {
-      btnSend.disabled = true;
-      btnSend.textContent = 'Sending...';
-      sendOwnerOtp(loginPhone).then(function (res) {
-        btnSend.disabled = false;
-        btnSend.textContent = 'Send code';
-        if (res.ok) { errOtp.classList.remove('show'); startCooldown(); }
-        else { errOtp.textContent = res.error; errOtp.classList.add('show'); }
-      });
-    });
-
-    document.getElementById('btn-change').addEventListener('click', function () {
-      stepOtp.hidden = true;
-      stepPhone.hidden = false;
-      errPhone.classList.remove('show');
-      errOtp.classList.remove('show');
-    });
-
-    function startCooldown() {
-      var left = 30;
-      btnResend.disabled = true;
-      btnResend.textContent = 'Resend code in 30s';
-      var t = setInterval(function () {
-        left--;
-        if (left <= 0) { clearInterval(t); btnResend.disabled = false; btnResend.textContent = 'Resend code'; }
-        else btnResend.textContent = 'Resend code in ' + left + 's';
-      }, 1000);
-    }
   }
 
   document.getElementById('forget-device').addEventListener('click', function () {
-    if (!confirm('Forget this device? You will need a new code to log in next time.')) return;
-    localStorage.removeItem('scc_owner');
-    sessionStorage.removeItem('scc_session');
-    location.reload();
+    if (!confirm('Forget this device and release the lock? You will need the secret code again, and any device can then register.')) return;
+    forgetThisDevice().then(function () { location.reload(); });
   });
 
   document.getElementById('logout').addEventListener('click', function () {
     sessionStorage.removeItem('scc_session');
     panel.hidden = true;
     authScreen.hidden = false;
-    document.getElementById('forget-device').hidden = false;
     if (typeof initAuth === 'function') initAuth();
   });
 
