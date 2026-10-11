@@ -165,6 +165,13 @@ document.addEventListener('DOMContentLoaded', function () {
         btnSend.textContent = 'Send code';
         if (!res.ok) { errPhone.textContent = res.error; errPhone.classList.add('show'); return; }
         loginPhone = res.email;
+      }).catch(function () {
+        btnSend.disabled = false;
+        btnSend.textContent = 'Send code';
+        errPhone.textContent = 'Something went wrong starting the login. Try again.';
+        errPhone.classList.add('show');
+      }).then(function () {
+        if (!loginPhone) return;
         document.getElementById('otp-mask').textContent = loginPhone;
         stepPhone.hidden = true;
         stepOtp.hidden = false;
