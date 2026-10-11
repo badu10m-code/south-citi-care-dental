@@ -1,110 +1,99 @@
-// South Citi Care Dental Clinic - interactions
+// Shared interactions: reveal, 3D tilt, counters, typewriter, nav, parallax
 document.addEventListener('DOMContentLoaded', function () {
+  // Page fade-in
+  document.body.classList.add('loaded');
+
   // Scroll reveal
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
-  // Booking form
-  var form = document.getElementById('booking-form');
-  if (form) {
-    // min date = today
-    var dateInput = document.getElementById('f-date');
-    if (dateInput) { dateInput.min = new Date().toISOString().split('T')[0]; }
-
-    form.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var appt = {
-        id: 'SCC-' + Date.now().toString(36).toUpperCase(),
-        name: document.getElementById('f-name').value.trim(),
-        phone: document.getElementById('f-phone').value.trim(),
-        service: document.getElementById('f-service').value,
-        date: document.getElementById('f-date').value,
-        time: document.getElementById('f-time').value,
-        message: document.getElementById('f-message').value.trim(),
-        created: new Date().toISOString(),
-        status: 'new'
-      };
-      // Demo storage (works until backend is connected)
-      try {
-        var all = JSON.parse(localStorage.getItem('scc_appointments') || '[]');
-        all.push(appt);
-        localStorage.setItem('scc_appointments', JSON.stringify(all));
-      } catch (e) {}
-      // Production endpoint (wired for Cloudflare deploy; silently skipped in demo)
-      try {
-        fetch('/api/appointments', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(appt)
-        }).catch(function () {});
-      } catch (e) {}
-
-      form.style.display = 'none';
-      var ok = document.getElementById('form-success');
-      ok.classList.add('show');
-      document.getElementById('ok-ref').textContent = appt.id;
-      var waMsg = 'Hello South Citi Care Dental Clinic, I would like to book an appointment.%0A%0AName: ' + encodeURIComponent(appt.name) +
-        '%0APhone: ' + encodeURIComponent(appt.phone) +
-        '%0AService: ' + encodeURIComponent(appt.service) +
-        '%0APreferred: ' + encodeURIComponent(appt.date + ' ' + appt.time) +
-        '%0AReference: ' + appt.id;
-      document.getElementById('ok-wa').href = 'https://wa.me/919903450487?text=' + waMsg;
+  // 3D tilt cards
+  document.querySelectorAll('[data-tilt]').forEach(function (card) {
+    var glare = card.querySelector('.tilt-glare');
+    card.addEventListener('mousemove', function (ev) {
+      var r = card.getBoundingClientRect();
+      var x = (ev.clientX - r.left) / r.width - 0.5;
+      var y = (ev.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'perspective(900px) rotateY(' + (x * 10) + 'deg) rotateX(' + (-y * 10) + 'deg) translateY(-4px)';
+      if (glare) glare.style.background = 'radial-gradient(circle at ' + ((x + 0.5) * 100) + '% ' + ((y + 0.5) * 100) + '%, rgba(255,255,255,0.35), transparent 55%)';
     });
-  }
+    card.addEventListener('mouseleave', function () {
+      card.style.transform = '';
+      if (glare) glare.style.background = 'transparent';
+    });
+  });
 
-  // Admin panel
-  var gate = document.getElementById('admin-gate');
-  var panel = document.getElementById('admin-panel');
-  if (gate) {
-    var ADMIN_PASS = 'scc-admin-2026'; // change before real use
-    var saved = sessionStorage.getItem('scc_admin_ok');
-    if (saved === '1') showPanel();
-
-    document.getElementById('gate-form').addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var pass = document.getElementById('gate-pass').value;
-      if (pass === ADMIN_PASS) {
-        sessionStorage.setItem('scc_admin_ok', '1');
-        showPanel();
-      } else {
-        document.getElementById('gate-error').style.display = 'block';
+  // Animated counters
+  var cio = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      cio.unobserve(e.target);
+      var el = e.target, end = parseFloat(el.dataset.count), dec = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+      var t0 = null;
+      function step(ts) {
+        if (!t0) t0 = ts;
+        var p = Math.min((ts - t0) / 1400, 1);
+        p = 1 - Math.pow(1 - p, 3);
+        el.textContent = (end * p).toFixed(dec);
+        if (p < 1) requestAnimationFrame(step);
       }
+      requestAnimationFrame(step);
     });
-    document.getElementById('logout').addEventListener('click', function () {
-      sessionStorage.removeItem('scc_admin_ok');
-      location.reload();
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+
+  // Typewriter
+  var tw = document.getElementById('typewriter');
+  if (tw) {
+    var words = JSON.parse(tw.dataset.words);
+    var wi = 0, ci = 0, del = false;
+    (function tick() {
+      var word = words[wi];
+      tw.textContent = word.slice(0, ci);
+      if (!del && ci < word.length) { ci++; setTimeout(tick, 70); }
+      else if (!del && ci === word.length) { del = true; setTimeout(tick, 1600); }
+      else if (del && ci > 0) { ci--; setTimeout(tick, 35); }
+      else { del = false; wi = (wi + 1) % words.length; setTimeout(tick, 350); }
+    })();
+  }
+
+  // Hero parallax tooth
+  var tooth = document.querySelector('.tooth-float');
+  var hero = document.querySelector('.hero-3d');
+  if (tooth && hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    hero.addEventListener('mousemove', function (ev) {
+      var r = hero.getBoundingClientRect();
+      var x = (ev.clientX - r.left) / r.width - 0.5;
+      var y = (ev.clientY - r.top) / r.height - 0.5;
+      tooth.style.transform = 'translate(' + (x * 26) + 'px,' + (y * 20) + 'px) rotateY(' + (x * 14) + 'deg) rotateX(' + (-y * 10) + 'deg)';
+    });
+    hero.addEventListener('mouseleave', function () { tooth.style.transform = ''; });
+  }
+
+  // Word-by-word hero title
+  document.querySelectorAll('.words-anim').forEach(function (el) {
+    var text = el.textContent; el.textContent = '';
+    text.split(' ').forEach(function (w, i) {
+      var s = document.createElement('span');
+      s.className = 'word'; s.textContent = w;
+      s.style.animationDelay = (0.25 + i * 0.09) + 's';
+      el.appendChild(s); el.appendChild(document.createTextNode(' '));
+    });
+  });
+
+  // Mobile nav
+  var burger = document.querySelector('.nav-burger');
+  if (burger) {
+    burger.addEventListener('click', function () {
+      document.querySelector('.nav-links').classList.toggle('open');
+      burger.classList.toggle('active');
     });
   }
 
-  function showPanel() {
-    gate.style.display = 'none';
-    panel.style.display = 'block';
-    var all = [];
-    try { all = JSON.parse(localStorage.getItem('scc_appointments') || '[]'); } catch (e) {}
-    all.reverse();
-    var list = document.getElementById('appt-list');
-    var count = document.getElementById('appt-count');
-    count.textContent = all.length;
-    if (!all.length) {
-      list.innerHTML = '<p style="color:#475569">No appointments yet. When a patient submits the booking form on this device, the entry appears here.</p>';
-      return;
-    }
-    list.innerHTML = all.map(function (a) {
-      return '<div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><b>' +
-        esc(a.name) + ' <span style="color:#0284C7;font-size:0.8rem">' + esc(a.id) + '</span></b>' +
-        '<span style="font-size:0.8rem;color:#475569">' + esc(a.created.slice(0, 10)) + '</span></div>' +
-        '<p style="font-size:0.9rem;color:#475569;margin-top:6px">' + esc(a.service) + ' | ' + esc(a.date) + ' ' + esc(a.time) + ' | ' + esc(a.phone) + '</p>' +
-        (a.message ? '<p style="font-size:0.88rem;margin-top:4px">' + esc(a.message) + '</p>' : '') + '</div>';
-    }).join('');
-  }
-
-  function esc(s) {
-    return String(s || '').replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
+  // Footer year
+  document.querySelectorAll('.fyear').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 });

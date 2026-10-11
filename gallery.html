@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinic Gallery | South Citi Care Dental Clinic, New Alipore</title>
+<meta name="description" content="Real photos of South Citi Care Dental Clinic in New Alipore, Kolkata: treatment rooms, reception, awards and the clinic entrance.">
+<link rel="canonical" href="https://southciticaredental.in/gallery.html">
+<meta property="og:title" content="Clinic Gallery | South Citi Care Dental Clinic, New Alipore">
+<meta property="og:description" content="Real photos of South Citi Care Dental Clinic in New Alipore, Kolkata: treatment rooms, reception, awards and the clinic entrance.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/tooth-3d.png">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html"><span class="brand-badge"><img src="assets/tooth-3d.png" alt=""></span> South Citi Care Dental</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="doctors.html">Our Doctors</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-sm" href="contact.html#book">Book Appointment</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<div class="page-head">
+  <span class="section-tag reveal">Gallery</span>
+  <h1 class="words-anim">Inside the clinic</h1>
+  <p class="reveal d1">Real photos from our Google listing. Tap any photo to view it full size.</p>
+</div>
+<section style="padding-top:20px">
+  <div class="container">
+    <div class="gal-grid">
+      <figure class="gal-item reveal" data-lightbox="assets/storefront.jpg"><img src="assets/storefront-thumb.jpg" alt="Clinic entrance in New Alipore" loading="lazy"><figcaption>Clinic entrance, near PNB, New Alipore</figcaption></figure>
+      <figure class="gal-item reveal d1" data-lightbox="assets/dental-chair.jpg"><img src="assets/dental-chair-thumb.jpg" alt="Treatment room with dental chair" loading="lazy"><figcaption>Treatment room with digital X-ray</figcaption></figure>
+      <figure class="gal-item reveal d2" data-lightbox="assets/doctor-patient.jpg"><img src="assets/doctor-patient-thumb.jpg" alt="Dentist treating a smiling patient" loading="lazy"><figcaption>In the operatory</figcaption></figure>
+      <figure class="gal-item reveal" data-lightbox="assets/clinic-desk.jpg"><img src="assets/clinic-desk-thumb.jpg" alt="Consultation desk" loading="lazy"><figcaption>Consultation desk</figcaption></figure>
+      <figure class="gal-item reveal d1" data-lightbox="assets/awards.jpg"><img src="assets/awards-thumb.jpg" alt="Awards and plaques" loading="lazy"><figcaption>Awards &amp; recognitions</figcaption></figure>
+      <figure class="gal-item reveal d2" data-lightbox="assets/signboard.jpg"><img src="assets/signboard-thumb.jpg" alt="Doctors availability board" loading="lazy"><figcaption>Doctor availability board</figcaption></figure>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox"><img src="" alt="Enlarged clinic photo"></div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var lb = document.getElementById('lightbox'), img = lb.querySelector('img');
+  document.querySelectorAll('[data-lightbox]').forEach(function (fig) {
+    fig.addEventListener('click', function () { img.src = fig.dataset.lightbox; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('open'); });
+});
+</script>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>South Citi Care Dental Clinic</h4>
+        <p>Speciality dental care in New Alipore, Kolkata. Multi-disciplinary treatments by M.D.S-qualified dentists.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="doctors.html">Our Doctors</a></li>
+          <li><a href="gallery.html">Clinic Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <p>23B/40/1A, near PNB, Mani Aangan, Block B, New Alipore, Kolkata 700053<br>Mon-Sat 9:30 AM - 9:30 PM</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+919903450487">+91 99034 50487</a></li>
+          <li><a href="https://wa.me/919903450487" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://maps.google.com/?cid=3090220167103892671" target="_blank" rel="noopener">Google Maps</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span class="fyear">2026</span> South Citi Care Dental Clinic</span>
+      <span><a href="admin.html">Staff login</a></span>
+    </div>
+  </div>
+</footer>
+<script src="config.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
