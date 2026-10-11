@@ -230,6 +230,7 @@ body.admin-body { margin: 0; }
 }
 .del:hover { background: #FEF2F2; }
 .empty { text-align: center; color: #64748B; padding: 30px 10px; font-size: .9rem; }
+.empty.offline { padding-top: 0; font-size: .78rem; color: #B45309; }
 .panel-foot { font-size: .76rem; color: #94A3B8; margin-top: 18px; line-height: 1.6; }
 
 /* ===== buttons (dashboard scope) ===== */

@@ -36,23 +36,22 @@ document.addEventListener('DOMContentLoaded', function () {
   function load() {
     var list = document.getElementById('appt-list');
     list.innerHTML = '<p class="empty">Loading&hellip;</p>';
-    Promise.all([loadCloud(), Promise.resolve(loadLocal())]).then(function (res) {
-      var cloud = res[0], local = res[1];
-      var merged = cloud.slice();
+    binLoad().then(function (d) {
+      var cloud = (d && d.appointments) ? d.appointments : null;
+      var local = loadLocal();
+      var merged = (cloud || []).slice();
       var ids = {};
       merged.forEach(function (a) { ids[a.id] = 1; });
       local.forEach(function (a) { if (!ids[a.id]) merged.push(a); });
       merged.sort(function (a, b) { return (b.created || '').localeCompare(a.created || ''); });
       current = merged;
-      render();
+      render(!d);
       saveLocal(merged);
-      if (cloud.length !== merged.length) binSave({ appointments: merged });
-    }).catch(function () {
-      list.innerHTML = '<p class="empty">Could not reach the cloud store. Check the internet connection and click Refresh.</p>';
+      if (cloud && cloud.length !== merged.length) binSave({ appointments: merged });
     });
   }
 
-  function render() {
+  function render(offline) {
     var term = (document.getElementById('appt-search').value || '').toLowerCase().trim();
     var rows = current.filter(function (a) {
       if (activeFilter !== 'all' && a.status !== activeFilter) return false;
@@ -67,7 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var list = document.getElementById('appt-list');
     if (!rows.length) {
-      list.innerHTML = '<p class="empty">' + (current.length ? 'No appointments match this search or filter.' : 'No appointments yet. Bookings from the website will appear here.') + '</p>';
+      list.innerHTML = '<p class="empty">' + (current.length ? 'No appointments match this search or filter.' : 'No appointments yet. Bookings from the website will appear here.') + '</p>' +
+        (offline ? '<p class="empty offline">Offline mode: the shared cloud store is not reachable right now, so only bookings saved on this device are shown.</p>' : '');
       return;
     }
     list.innerHTML = rows.map(function (a) {
