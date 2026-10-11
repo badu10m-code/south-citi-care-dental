@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Login | South Citi Care Dental Clinic</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<style>
+:root { --primary:#0EA5E9; --bg:#F0F9FF; --fg:#0C4A6E; --border:#BAE6FD; --card:#fff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Open Sans',sans-serif; background:var(--bg); color:var(--fg); min-height:100vh; display:grid; place-items:center; padding:20px; }
+.gate { background:var(--card); border-radius:16px; box-shadow:0 12px 32px rgba(14,165,233,.12); border:1px solid var(--border); padding:36px; width:min(420px,100%); }
+h1 { font-family:'Poppins',sans-serif; font-size:1.3rem; margin-bottom:6px; }
+p { font-size:.9rem; color:#475569; margin-bottom:22px; }
+label { font-size:.85rem; font-weight:600; display:block; margin-bottom:6px; }
+input { width:100%; padding:12px 14px; border-radius:10px; border:1.5px solid var(--border); font-size:1rem; margin-bottom:14px; }
+input:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(14,165,233,.15); }
+button { width:100%; padding:13px; border:none; border-radius:999px; background:var(--primary); color:#fff; font-weight:600; font-family:'Poppins',sans-serif; font-size:.95rem; cursor:pointer; }
+button:hover { background:#0284C7; }
+.error { display:none; color:#DC2626; font-size:.85rem; margin-top:10px; }
+#admin-panel { display:none; width:min(860px,100%); }
+.panel-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; flex-wrap:wrap; gap:10px; }
+.panel-head h1 { margin:0; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:0 8px 24px rgba(14,165,233,.10); padding:26px; margin-bottom:14px; }
+</style>
+</head>
+<body>
+<div class="gate" id="admin-gate">
+  <h1>Staff Login</h1>
+  <p>South Citi Care Dental Clinic, appointments dashboard.</p>
+  <form id="gate-form">
+    <label for="gate-pass">Password</label>
+    <input type="password" id="gate-pass" required placeholder="Enter staff password">
+    <button type="submit">Sign In</button>
+    <div class="error" id="gate-error">Wrong password. Try again.</div>
+  </form>
+</div>
+
+<div id="admin-panel">
+  <div class="panel-head">
+    <h1>Appointments</h1>
+    <div style="display:flex;gap:12px;align-items:center">
+      <span style="font-size:.9rem;color:#475569">Total: <b id="appt-count">0</b></span>
+      <button id="logout" style="width:auto;padding:10px 22px;background:transparent;color:#0C4A6E;border:1.5px solid #BAE6FD">Log out</button>
+    </div>
+  </div>
+  <div id="appt-list"></div>
+  <p style="font-size:.8rem;color:#475569;margin-top:18px">Demo mode: appointments submitted from the same browser are stored locally. Once the site is deployed with the Cloudflare backend, entries from every patient appear here.</p>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
