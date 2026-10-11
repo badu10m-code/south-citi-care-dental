@@ -1,6 +1,9 @@
 /* Staff login + appointments dashboard */
 body.admin-body { margin: 0; }
 
+/* the hidden attribute must always win, even over display:flex rules */
+[hidden] { display: none !important; }
+
 /* ===== auth screen ===== */
 .auth-wrap {
   min-height: 100vh;
