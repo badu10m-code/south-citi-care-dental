@@ -1,6 +1,6 @@
-// Owner OTP login: only the registered owner number can open the panel.
+// Owner OTP login: only the registered clinic Gmail can open the panel.
 // First visit = register with a one-time code; trusted devices go straight in.
-var OWNER_NUMBERS = ['9242158621']; // the only phone allowed to register
+var OWNER_EMAILS = ['brajasantra36@gmail.com']; // the only inbox allowed to register
 var OTP_TTL_MS = 10 * 60 * 1000;    // code valid for 10 minutes
 var OTP_MAX_TRIES = 5;
 var FORMSUBMIT_URL = 'https://formsubmit.co/ajax/b4f05829e29ea159de2e8bbd344fb8f7';
@@ -8,10 +8,8 @@ var FORMSUBMIT_URL = 'https://formsubmit.co/ajax/b4f05829e29ea159de2e8bbd344fb8f
 function ownerDevice() {
   try { return JSON.parse(localStorage.getItem('scc_owner') || 'null'); } catch (e) { return null; }
 }
-function normalisePhone(raw) {
-  var d = String(raw || '').replace(/\D/g, '');
-  if (d.length > 10) d = d.slice(-10);
-  return d;
+function normaliseEmail(raw) {
+  return String(raw || '').trim().toLowerCase();
 }
 
 async function sha256(text) {
@@ -21,16 +19,16 @@ async function sha256(text) {
   }).join('');
 }
 
-async function sendOwnerOtp(rawPhone) {
-  var phone = normalisePhone(rawPhone);
-  if (OWNER_NUMBERS.indexOf(phone) === -1) {
-    return { ok: false, error: 'This number is not registered as owner. Ask the clinic owner for access.' };
+async function sendOwnerOtp(rawEmail) {
+  var email = normaliseEmail(rawEmail);
+  if (OWNER_EMAILS.indexOf(email) === -1) {
+    return { ok: false, error: 'This email is not registered as owner. Only the clinic owner\'s Gmail can access this panel.' };
   }
   var code = String(Math.floor(100000 + Math.random() * 900000));
   var salt = Math.random().toString(36).slice(2, 10);
   var hash = await sha256(code + salt);
   var saved = await binSave({
-    otp: { phone: phone, hash: hash, salt: salt, exp: Date.now() + OTP_TTL_MS, attempts: 0 }
+    otp: { email: email, hash: hash, salt: salt, exp: Date.now() + OTP_TTL_MS, attempts: 0 }
   });
   if (!saved) return { ok: false, error: 'Could not start login. Check your internet connection and try again.' };
 
@@ -47,19 +45,15 @@ async function sendOwnerOtp(rawPhone) {
   if (String(mail.success) !== 'true') {
     return { ok: false, error: 'The code email could not be sent. Try again in a moment.' };
   }
-  return { ok: true, phone: phone, maskHint: maskEmailHint() };
+  return { ok: true, email: email };
 }
 
-function maskEmailHint() {
-  return 'braja•••••36@gmail.com';
-}
-
-async function verifyOwnerOtp(rawPhone, code) {
-  var phone = normalisePhone(rawPhone);
+async function verifyOwnerOtp(rawEmail, code) {
+  var email = normaliseEmail(rawEmail);
   var data = await binLoad();
   var otp = data && data.otp;
-  if (!data || !otp || otp.phone !== phone) {
-    return { ok: false, error: 'No active code. Send a new one.' };
+  if (!data || !otp || otp.email !== email) {
+    return { ok: false, error: 'No active code for this email. Send a new one.' };
   }
   if (Date.now() > otp.exp) {
     await binSave({ otp: null });
@@ -71,21 +65,21 @@ async function verifyOwnerOtp(rawPhone, code) {
   }
   var hash = await sha256(String(code).replace(/\D/g, '') + otp.salt);
   if (hash !== otp.hash) {
-    await binSave({ otp: { phone: otp.phone, hash: otp.hash, salt: otp.salt, exp: otp.exp, attempts: otp.attempts + 1 } });
+    await binSave({ otp: { email: otp.email, hash: otp.hash, salt: otp.salt, exp: otp.exp, attempts: otp.attempts + 1 } });
     var left = OTP_MAX_TRIES - (otp.attempts + 1);
     return { ok: false, error: 'Wrong code. ' + left + ' attempt' + (left === 1 ? '' : 's') + ' left.' };
   }
   await binSave({ otp: null });
   // first successful code = this device is now the registered owner device
   var device = ownerDevice();
-  if (!device || device.phone !== phone) {
+  if (!device || device.email !== email) {
     device = {
-      phone: phone,
+      email: email,
       token: Math.random().toString(36).slice(2) + Date.now().toString(36),
       registeredAt: new Date().toISOString()
     };
     localStorage.setItem('scc_owner', JSON.stringify(device));
-    await binSave({ staff: [{ role: 'owner', phone: phone, registeredAt: device.registeredAt }] });
+    await binSave({ staff: [{ role: 'owner', email: email, registeredAt: device.registeredAt }] });
   }
   sessionStorage.setItem('scc_session', '1');
   return { ok: true, firstTime: true };

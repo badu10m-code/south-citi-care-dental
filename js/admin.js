@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // registered device: straight into the panel, no code needed
   var device = (typeof ownerDevice === 'function') ? ownerDevice() : null;
-  if (device && device.phone && sessionStorage.getItem('scc_session') === '1') enter();
-  else if (device && device.phone) {
+  if (device && device.email && sessionStorage.getItem('scc_session') === '1') enter();
+  else if (device && device.email) {
     // trusted device but a previous logout: restore session instantly too
     sessionStorage.setItem('scc_session', '1');
     enter();
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     authScreen.hidden = true;
     document.getElementById('forget-device').hidden = true;
     panel.hidden = false;
-    document.getElementById('user-phone').textContent = '+91 ' + (device ? device.phone : '');
+    document.getElementById('user-email').textContent = device ? device.email : '';
     load();
   }
 
@@ -139,11 +139,11 @@ document.addEventListener('DOMContentLoaded', function () {
   function initAuth() {
     panel.hidden = true;
     authScreen.hidden = false;
-    var stepPhone = document.getElementById('step-phone');
+    var stepPhone = document.getElementById('step-email');
     var stepOtp = document.getElementById('step-otp');
-    var phoneEl = document.getElementById('auth-phone');
+    var phoneEl = document.getElementById('auth-email');
     var otpEl = document.getElementById('auth-otp');
-    var errPhone = document.getElementById('err-phone');
+    var errPhone = document.getElementById('err-email');
     var errOtp = document.getElementById('err-otp');
     var btnSend = document.getElementById('btn-send');
     var btnVerify = document.getElementById('btn-verify');
@@ -164,8 +164,8 @@ document.addEventListener('DOMContentLoaded', function () {
         btnSend.disabled = false;
         btnSend.textContent = 'Send code';
         if (!res.ok) { errPhone.textContent = res.error; errPhone.classList.add('show'); return; }
-        loginPhone = res.phone;
-        document.getElementById('otp-mask').textContent = '+91 ' + loginPhone;
+        loginPhone = res.email;
+        document.getElementById('otp-mask').textContent = loginPhone;
         stepPhone.hidden = true;
         stepOtp.hidden = false;
         startCooldown();
