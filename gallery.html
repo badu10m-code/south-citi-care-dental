@@ -14,7 +14,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/gallery.css">
 </head>
 <body>
 
@@ -51,16 +53,7 @@
   </div>
 </section>
 <div class="lightbox" id="lightbox"><img src="" alt="Enlarged clinic photo"></div>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var lb = document.getElementById('lightbox'), img = lb.querySelector('img');
-  document.querySelectorAll('[data-lightbox]').forEach(function (fig) {
-    fig.addEventListener('click', function () { img.src = fig.dataset.lightbox; lb.classList.add('open'); });
-  });
-  lb.addEventListener('click', function () { lb.classList.remove('open'); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('open'); });
-});
-</script>
+<script src="js/gallery.js"></script>
 
 <footer>
   <div class="container">
@@ -97,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
 </footer>
 <script src="config.js"></script>
-<script src="script.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>

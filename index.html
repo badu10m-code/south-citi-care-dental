@@ -14,7 +14,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/home.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -37,7 +39,7 @@
   "priceRange": "₹₹",
   "areaServed": "New Alipore, Kolkata",
   "hasMap": "https://maps.google.com/?cid=3090220167103892671",
-  "founder": [{ "@type": "Person", "name": "Dr. Anish Bharti" }, { "@type": "Person", "name": "Dr. Aditi Bharti" }]
+  "employee": [{ "@type": "Person", "name": "Dr. Anish Bharti", "jobTitle": "Dentist" }, { "@type": "Person", "name": "Dr. Aditi Bharti", "jobTitle": "Dentist" }]
 }
 </script>
 </head>
@@ -70,10 +72,10 @@
         <a class="btn btn-outline" href="tel:+919903450487">Call +91 99034 50487</a>
       </div>
       <div class="hero-facts">
-        <div class="fact"><b><span data-count="15" data-decimals="0">0</span>+</b><span>Years of experience</span></div>
+        <div class="fact"><b><span data-count="15">0</span>+</b><span>Years of experience</span></div>
         <div class="fact"><b><span data-count="4.9" data-decimals="1">0</span></b><span>Google rating</span></div>
-        <div class="fact"><b><span data-count="62" data-decimals="0">0</span></b><span>Patient reviews</span></div>
-        <div class="fact"><b><span data-count="6" data-decimals="0">0</span></b><span>Days a week open</span></div>
+        <div class="fact"><b><span data-count="62">0</span></b><span>Patient reviews</span></div>
+        <div class="fact"><b><span data-count="6">0</span></b><span>Days a week open</span></div>
       </div>
     </div>
     <div class="tooth-float"><img src="assets/tooth-3d.png" alt="3D tooth mascot of South Citi Care Dental Clinic"></div>
@@ -104,7 +106,38 @@
   </div>
 </section>
 
-<section id="clinic" style="background:linear-gradient(180deg,#fff 0%,var(--bg) 100%)">
+<section id="dentists" style="background:linear-gradient(180deg,#fff 0%,var(--bg) 100%)">
+  <div class="container center">
+    <span class="section-tag reveal">Who treats you</span>
+    <h2 class="section-title reveal">Meet the dentists</h2>
+    <p class="section-sub reveal">M.D.S-qualified specialists who explain everything before they touch anything.</p>
+    <div class="grid-2" style="text-align:left">
+      <div class="tcard reveal" data-tilt><div class="tilt-glare"></div>
+        <div class="doc-row">
+          <div class="doc-avatar">AB</div>
+          <div>
+            <h3>Dr. Anish Bharti</h3>
+            <div class="cred">BDS, M.D.S (Prosthodontics &amp; Crown Bridge) · Implantologist · 15+ years</div>
+            <p>Trained at Dr. R. Ahmed Dental College, Kolkata. Known for painless root canals, implants and for walking every patient through the options first. Winner at the 17th IPS PG Convention.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tcard reveal d1" data-tilt><div class="tilt-glare"></div>
+        <div class="doc-row">
+          <div class="doc-avatar">AB</div>
+          <div>
+            <h3>Dr. Aditi Bharti</h3>
+            <div class="cred">BDS · 14 years of experience</div>
+            <p>Handles extractions, implants and dentures with the calm that patients keep mentioning in their reviews. A familiar, trusted name in New Alipore.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><a class="btn btn-outline reveal" href="doctors.html">More about our doctors</a>
+  </div>
+</section>
+
+<section id="clinic">
   <div class="container">
     <div class="grid-2" style="align-items:center">
       <div>
@@ -183,7 +216,7 @@
   </div>
 </footer>
 <script src="config.js"></script>
-<script src="script.js"></script>
-<script src="booking.js"></script>
+<script src="js/main.js"></script>
+<script src="js/tilt.js"></script><script src="js/animations.js"></script>
 </body>
 </html>
