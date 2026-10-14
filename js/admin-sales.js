@@ -1,6 +1,5 @@
 // admin-sales.js: sales & graphs page
-document.addEventListener('DOMContentLoaded', function () {
-  document.addEventListener('scc-admin-ready', function () {
+document.addEventListener('scc-admin-ready', function () {
     mergedAppointments().then(function (r) {
       var list = r.list;
       var today = new Date().toISOString().slice(0, 10);
@@ -51,4 +50,4 @@ document.addEventListener('DOMContentLoaded', function () {
       }).join('') || '<tr><td colspan="5" class="empty">No data yet.</td></tr>';
     });
   });
-});
+

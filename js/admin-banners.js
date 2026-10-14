@@ -2,8 +2,7 @@
 var cfg = null;
 var pickedTpl = 'festive';
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.addEventListener('scc-admin-ready', function () {
+document.addEventListener('scc-admin-ready', function () {
     buildTplGrid();
     wirePreview();
     wireUpload();
@@ -145,4 +144,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
-});
+

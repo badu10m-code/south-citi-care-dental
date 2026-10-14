@@ -3,8 +3,7 @@ function ytIdOf(url) {
   var m = String(url || '').match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
   return m ? m[1] : (/^[A-Za-z0-9_-]{11}$/.test(String(url || '').trim()) ? String(url).trim() : '');
 }
-document.addEventListener('DOMContentLoaded', function () {
-  document.addEventListener('scc-admin-ready', function () {
+document.addEventListener('scc-admin-ready', function () {
     loadConfig().then(function (c) {
       paint(c);
     });
@@ -77,4 +76,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
-});
+

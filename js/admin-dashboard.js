@@ -1,6 +1,5 @@
 // admin-dashboard.js: overview page (stats, charts, today's list)
-document.addEventListener('DOMContentLoaded', function () {
-  document.addEventListener('scc-admin-ready', function () {
+document.addEventListener('scc-admin-ready', function () {
     mergedAppointments().then(function (r) {
       var list = r.list;
       var today = new Date().toISOString().slice(0, 10);
@@ -41,4 +40,4 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-});
+

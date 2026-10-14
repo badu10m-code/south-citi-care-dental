@@ -6,8 +6,7 @@ var activeFilter = 'all';
 var listOffline = false;
 var clock = null;
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.addEventListener('scc-admin-ready', function () {
+document.addEventListener('scc-admin-ready', function () {
     load();
     wireToolbar();
     wireClock();
@@ -258,4 +257,4 @@ document.addEventListener('DOMContentLoaded', function () {
       modal.hidden = true; clock = null;
     });
   }
-});
+

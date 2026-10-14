@@ -234,7 +234,7 @@ body.admin-body { margin: 0; }
 .panel-foot { font-size: .76rem; color: #94A3B8; margin-top: 18px; line-height: 1.6; }
 
 /* ===== buttons (dashboard scope) ===== */
-#admin-panel .btn {
+#admin-panel .btn, .auth-screen .btn {
   border: 0;
   border-radius: 11px;
   background: linear-gradient(135deg, #0EA5E9, #38BDF8);
@@ -246,16 +246,16 @@ body.admin-body { margin: 0; }
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(14,165,233,.3);
 }
-#admin-panel .btn:hover { filter: brightness(1.05); }
-#admin-panel .btn:disabled { opacity: .55; cursor: default; }
-#admin-panel .btn-block { width: 100%; }
-#admin-panel .btn-outline {
+#admin-panel .btn:hover, .auth-screen .btn:hover { filter: brightness(1.05); }
+#admin-panel .btn:disabled, .auth-screen .btn:disabled { opacity: .55; cursor: default; }
+#admin-panel .btn-block, .auth-screen .btn-block { width: 100%; }
+#admin-panel .btn-outline, .auth-screen .btn-outline {
   background: #fff;
   color: #0C4A6E;
   border: 1.5px solid #BAE6FD;
   box-shadow: none;
 }
-#admin-panel .btn-sm { padding: 8px 14px; font-size: .8rem; }
+#admin-panel .btn-sm, .auth-screen .btn-sm { padding: 8px 14px; font-size: .8rem; }
 
 @media (max-width: 760px) {
   .stats { grid-template-columns: repeat(2, 1fr); }
