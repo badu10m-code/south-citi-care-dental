@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
       name: document.getElementById('f-name').value.trim(),
       phone: document.getElementById('f-phone').value.trim(),
       service: document.getElementById('f-service').value,
+      doctor: (document.getElementById('f-doctor') || {}).value || '',
       date: document.getElementById('f-date').value,
       time: document.getElementById('f-time').value,
       message: document.getElementById('f-message').value.trim(),

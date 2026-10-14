@@ -9,14 +9,14 @@
 <meta property="og:title" content="South Citi Care Dental Clinic | Dentist in New Alipore, Kolkata">
 <meta property="og:description" content="Painless root canals, dental implants and cosmetic dentistry by M.D.S specialists in New Alipore, Kolkata. Rated 4.9 stars by 62 patients. Book online.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/tooth-3d.png">
+<meta property="og:image" content="assets/clinic-desk.jpg">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/base.css?v=60">
+<link rel="stylesheet" href="css/components.css?v=60">
+<link rel="stylesheet" href="css/home.css?v=60">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -60,10 +60,13 @@
   </div>
 </nav>
 
-<header class="hero-3d" id="top">
-  <div class="blob b1"></div><div class="blob b2"></div>
+<header class="hero-media" id="top">
+  <div class="hero-bg" id="hero-bg">
+    <img id="hero-img" src="assets/dental-chair.jpg" alt="Treatment room at South Citi Care Dental Clinic">
+  </div>
+  <div class="hero-shade"></div>
   <div class="container hero-grid">
-    <div>
+    <div class="hero-copy">
       <div class="hero-badge"><span class="star">★★★★★</span> 4.9 on Google · 62 patient reviews</div>
       <h1 class="words-anim">Healthy teeth, honest advice, <span class="hl">zero fear</span></h1>
       <p class="typeline"><span class="type-label">New Alipore's clinic for</span> <span id="typewriter" data-words='["painless root canals","dental implants","smile makeovers","kids &amp; family dentistry"]'></span></p>
@@ -78,8 +81,13 @@
         <div class="fact"><b><span data-count="6">0</span></b><span>Days a week open</span></div>
       </div>
     </div>
-    <div class="tooth-float"><img src="assets/tooth-3d.png" alt="3D tooth mascot of South Citi Care Dental Clinic"></div>
+    <div class="hero-cards">
+      <div class="glass-card gc-1"><span class="ico">🦷</span><div><b>Painless single-sitting RCT</b><span>Most cases finished in one visit</span></div></div>
+      <div class="glass-card gc-2"><span class="ico">👨‍⚕️</span><div><b>M.D.S specialists</b><span>Every case, every time</span></div></div>
+      <div class="glass-card gc-3"><span class="ico">🕘</span><div><b>Mon to Sat, 9:30 AM to 9:30 PM</b><span>Sunday by appointment</span></div></div>
+    </div>
   </div>
+  <div class="hero-cue" aria-hidden="true"><span></span></div>
 </header>
 
 <div class="marquee" aria-hidden="true">
@@ -88,6 +96,15 @@
     <span>🦷 Root Canal (Single Sitting)</span><span>✨ Teeth Whitening</span><span>⚙️ Dental Implants</span><span>👑 Crowns &amp; Bridges</span><span>🧒 Family Dentistry</span><span>🪥 Gum Care</span>
   </div>
 </div>
+
+<section id="offer-strip" hidden>
+  <div class="container">
+    <div class="banner-stage">
+      <div id="banner-slides"></div>
+    </div>
+    <div class="banner-dots" id="banner-dots"></div>
+  </div>
+</section>
 
 <section id="services-teaser">
   <div class="container center">
@@ -153,7 +170,7 @@
       </div>
       <div class="reveal d1" data-tilt style="border-radius:24px">
         <div class="tilt-glare" style="border-radius:24px"></div>
-        <img src="assets/dental-chair-card.jpg" alt="Treatment room at South Citi Care Dental Clinic" style="border-radius:24px; box-shadow:var(--shadow-lift)">
+        <img src="assets/storefront-card.jpg" alt="South Citi Care Dental Clinic, New Alipore" style="border-radius:24px; box-shadow:var(--shadow-lift)">
       </div>
     </div>
   </div>
@@ -168,6 +185,19 @@
       <div class="tcard testi reveal" data-tilt><div class="tilt-glare"></div><div class="stars">★★★★★</div><p>"Dr. Anish Bharti is an excellent dentist with great expertise in Root Canal Treatment. His professional approach, patience, and attention to detail made the entire procedure smooth and comfortable."</p><div class="who">Kshetrajit G. M.</div><div class="src">Google review · 5 stars</div></div>
       <div class="tcard testi reveal d1" data-tilt><div class="tilt-glare"></div><div class="stars">★★★★★</div><p>"He did RCT &amp; crowning of my teeth with high excellency, which was a fully painless treatment. Doctor, his assistant and other personnel are very friendly."</p><div class="who">Shyama Prasad D.</div><div class="src">Google review · 5 stars</div></div>
       <div class="tcard testi reveal d2" data-tilt><div class="tilt-glare"></div><div class="stars">★★★★★</div><p>"They will inspect, find multiple solutions, make you understand the problem, provide necessary solutions and finally solve the issue with utmost care and professionalism."</p><div class="who">Saptarshi D.</div><div class="src">Google review · 5 stars</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="clinic-video">
+  <div class="container center">
+    <span class="section-tag reveal">Inside the clinic</span>
+    <h2 class="section-title reveal">A look around the clinic</h2>
+    <p class="section-sub reveal">A quick peek at the team and the treatment rooms in action.</p>
+    <div class="video-shell reveal" id="video-shell">
+      <div class="video-frame" id="video-frame"></div>
+      <div class="video-vignette"></div>
+      <div class="video-poster" id="video-poster"><img src="assets/clinic-desk.jpg" alt="Inside South Citi Care Dental Clinic"></div>
     </div>
   </div>
 </section>
@@ -215,8 +245,9 @@
     </div>
   </div>
 </footer>
-<script src="config.js?v=51"></script>
-<script src="js/main.js?v=51"></script>
-<script src="js/tilt.js?v=51"></script><script src="js/animations.js?v=51"></script>
+<script src="config.js?v=60"></script>
+<script src="js/main.js?v=60"></script>
+<script src="js/tilt.js?v=60"></script><script src="js/animations.js?v=60"></script>
+<script src="js/banner-templates.js?v=60"></script><script src="js/banners.js?v=60"></script>
 </body>
 </html>

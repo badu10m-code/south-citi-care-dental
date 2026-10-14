@@ -3,105 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Staff Login | South Citi Care Dental Clinic</title>
 <meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<title>Dashboard | South Citi Care Dental</title>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/admin.css?v=51">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css?v=60">
 </head>
-<body class="admin-body">
-
-<!-- ===== Login / OTP screen ===== -->
-<div class="auth-wrap" id="auth-screen">
+<body class="admin-body" data-page="dashboard">
+<div id="auth-screen" class="auth-wrap">
   <div class="auth-card">
-    <div class="auth-brand">
-      <div class="auth-logo">S</div>
-      <h1>South Citi Care</h1>
-      <p class="auth-sub">Staff login &middot; Appointments dashboard</p>
-    </div>
-
-    <!-- step 1: secret code -->
+    <div class="auth-logo">S</div>
+    <div class="auth-brand"><h1>South Citi Care Dental</h1></div>
+    <p class="auth-sub">Staff access. Enter the owner's secret code.</p>
     <form id="step-code" class="auth-step">
-      <label for="auth-code">Secret access code</label>
-      <input type="text" id="auth-code" placeholder="Enter secret code"
-             autocomplete="off" autocapitalize="off" spellcheck="false" required>
-      <button type="submit" class="btn btn-block" id="btn-unlock">Unlock panel</button>
-      <p class="auth-note">Only the clinic owner has this code. The first correct entry registers this device, and from then on the panel opens directly here.</p>
-      <div class="error" id="err-code"></div>
+      <label for="auth-code">Secret code</label>
+      <input id="auth-code" type="text" autocomplete="off" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+      <button class="btn btn-block" id="btn-unlock" type="submit">Unlock panel</button>
+      <p class="error" id="err-code"></p>
     </form>
-
-    <button type="button" class="forget" id="forget-device" hidden>Forget this device &amp; register again</button>
+    <p class="auth-note">This code is known only to the clinic owner. The first correct entry locks the panel to this device, so no other device can register even with the code.</p>
+    <button class="forget" id="forget-device" type="button">Forget this device</button>
   </div>
 </div>
-
-<!-- ===== Dashboard panel ===== -->
 <div id="admin-panel" hidden>
-  <header class="topbar">
-    <div class="topbar-brand">
-      <div class="topbar-logo">S</div>
-      <div>
-        <b>South Citi Care Dental</b>
-        <span>Appointments dashboard</span>
-      </div>
-    </div>
-    <div class="topbar-user">
-      <span class="badge-owner">Owner</span>
-      <span class="mono">Owner access</span>
-      <button id="logout" class="btn btn-outline btn-sm">Log out</button>
-    </div>
-  </header>
-
-  <main class="panel-main">
-    <section class="stats">
+  <aside class="side-nav" id="side-nav"></aside>
+  <div class="admin-wrap">
+    <header class="topbar">
+      <div class="topbar-brand"><span class="topbar-logo">S</span><div><b>South Citi Care Dental</b><span id="page-sub"></span></div></div>
+      <div class="topbar-user"><span class="badge-owner">Owner</span><button class="btn btn-outline btn-sm" id="logout">Log out</button></div>
+    </header>
+    <main class="panel-main">
+<div class="stats">
       <div class="stat"><b id="stat-total">0</b><span>Total appointments</span></div>
       <div class="stat"><b id="stat-new">0</b><span>New, need call back</span></div>
       <div class="stat"><b id="stat-confirmed">0</b><span>Confirmed</span></div>
       <div class="stat"><b id="stat-today">0</b><span>Received today</span></div>
-    </section>
-
-    <section class="toolbar">
-      <input type="search" id="appt-search" placeholder="Search name, phone, service&hellip;" autocomplete="off">
-      <div class="chips" id="status-chips">
-        <button class="chip active" data-f="all">All</button>
-        <button class="chip" data-f="new">New</button>
-        <button class="chip" data-f="confirmed">Confirmed</button>
-        <button class="chip" data-f="completed">Completed</button>
-        <button class="chip" data-f="cancelled">Cancelled</button>
-      </div>
-      <div class="toolbar-btns">
-        <button id="refresh" class="btn btn-outline btn-sm">Refresh</button>
-        <button id="export-csv" class="btn btn-outline btn-sm">Export CSV</button>
-      </div>
-    </section>
-
-    <section class="table-card">
-      <div id="appt-list"><p class="empty">Loading&hellip;</p></div>
-    </section>
-
-    <p class="panel-foot">Appointments sync from a shared cloud store, so entries from every patient device appear here. Move to the Cloudflare backend before handling real patient data.</p>
-  </main>
-</div>
-
-<script src="config.js?v=48"></script>
-<script src="js/store.js?v=48"></script>
-<script src="js/auth.js?v=51"></script>
-<script src="js/main.js?v=51"></script>
-<script src="js/admin.js?v=51"></script>
-
-<div class="modal" id="clock-modal" hidden>
-  <div class="modal-card">
-    <h3>Set appointment time</h3>
-    <div class="clock-step" id="clock-step">Pick hour</div>
-    <div class="clock-preview"><b id="clock-val">--:--</b><span class="ap-toggle"><button type="button" id="ap-am" class="active">AM</button><button type="button" id="ap-pm">PM</button></span></div>
-    <div class="clock-face" id="clock-face"></div>
-    <div class="quick-slots" id="quick-slots"></div>
-    <div class="modal-btns">
-      <button type="button" class="btn btn-outline btn-sm" id="clock-clear">Clear</button>
-      <button type="button" class="btn btn-outline btn-sm" id="clock-cancel">Cancel</button>
-      <button type="button" class="btn btn-primary btn-sm" id="clock-save">Save</button>
     </div>
+    <div class="grid-charts">
+      <div class="table-card chart-card"><h3>Bookings, last 14 days</h3><canvas id="ch-days" height="230"></canvas></div>
+      <div class="table-card chart-card"><h3>Status split</h3><canvas id="ch-status" height="230"></canvas></div>
+    </div>
+    <h3 class="sec-h">Received today</h3>
+    <div class="table-card"><div id="today-list"><p class="empty">Loading&hellip;</p></div></div>
+    <div class="quick-links">
+      <a class="btn" href="admin-appointments.html">All appointments</a>
+      <a class="btn btn-outline" href="admin-sales.html">Sales &amp; graphs</a>
+      <a class="btn btn-outline" href="admin-banners.html">Homepage banners</a>
+      <a class="btn btn-outline" href="admin-settings.html">Settings</a>
+      <a class="btn btn-outline" href="index.html" target="_blank" rel="noopener">View website</a>
+    </div>
+    </main>
   </div>
 </div>
+<script src="config.js?v=60"></script>
+<script src="js/store.js?v=60"></script>
+<script src="js/auth.js?v=60"></script>
+<script src="js/admin-core.js?v=60"></script>
+<script src="js/admin-dashboard.js?v=60"></script>
 </body>
 </html>

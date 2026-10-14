@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Banners | South Citi Care Dental</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css?v=60">
+</head>
+<body class="admin-body" data-page="banners">
+<div id="auth-screen" class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-logo">S</div>
+    <div class="auth-brand"><h1>South Citi Care Dental</h1></div>
+    <p class="auth-sub">Staff access. Enter the owner's secret code.</p>
+    <form id="step-code" class="auth-step">
+      <label for="auth-code">Secret code</label>
+      <input id="auth-code" type="text" autocomplete="off" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+      <button class="btn btn-block" id="btn-unlock" type="submit">Unlock panel</button>
+      <p class="error" id="err-code"></p>
+    </form>
+    <p class="auth-note">This code is known only to the clinic owner. The first correct entry locks the panel to this device, so no other device can register even with the code.</p>
+    <button class="forget" id="forget-device" type="button">Forget this device</button>
+  </div>
+</div>
+<div id="admin-panel" hidden>
+  <aside class="side-nav" id="side-nav"></aside>
+  <div class="admin-wrap">
+    <header class="topbar">
+      <div class="topbar-brand"><span class="topbar-logo">S</span><div><b>South Citi Care Dental</b><span id="page-sub"></span></div></div>
+      <div class="topbar-user"><span class="badge-owner">Owner</span><button class="btn btn-outline btn-sm" id="logout">Log out</button></div>
+    </header>
+    <main class="panel-main">
+<div class="banner-layout">
+      <div class="table-card">
+        <h3>1. Pick a template</h3>
+        <div class="tpl-grid" id="tpl-grid"></div>
+        <div class="field"><label>Badge (top line)</label><input id="tpl-badge" placeholder="Durga Puja special"></div>
+        <div class="field"><label>Main heading</label><input id="tpl-heading" placeholder="Flat 20% off this festive week"></div>
+        <div class="field"><label>Sub line</label><input id="tpl-sub" placeholder="On root canals, whitening and check-ups"></div>
+        <div class="field"><label>Button text (optional)</label><input id="tpl-cta" placeholder="Book an appointment"></div>
+        <button class="btn" id="save-tpl" type="button">Save banner to homepage</button>
+      </div>
+      <div class="table-card">
+        <h3>Live preview</h3>
+        <div class="banner-stage preview-stage"><div id="tpl-preview"></div></div>
+        <div class="banner-dots" style="visibility:hidden"><button></button></div>
+      </div>
+    </div>
+    <div class="table-card">
+      <h3>2. Or upload your own poster</h3>
+      <p class="hint">JPG or PNG, any size. It is compressed automatically before saving. Uploaded posters show on the homepage just like templates.</p>
+      <input type="file" id="banner-file" accept="image/*">
+      <p class="hint" id="upload-status"></p>
+    </div>
+    <h3 class="sec-h">3. Your banners on the homepage</h3>
+    <div class="table-card"><div id="banner-list"><p class="empty">Loading&hellip;</p></div></div>
+    <p class="panel-foot">Every active banner takes a turn on the homepage carousel. Toggle one off to hide it without deleting. The cloud store is demo-grade, so keep uploads to a few banners.</p>
+    </main>
+  </div>
+</div>
+<script src="config.js?v=60"></script>
+<script src="js/store.js?v=60"></script>
+<script src="js/auth.js?v=60"></script>
+<script src="js/admin-core.js?v=60"></script>
+<script src="js/banner-templates.js?v=60"></script><script src="js/admin-banners.js?v=60"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-// animations.js: counters, typewriter, word-by-word title, hero tooth parallax
+// animations.js: counters, typewriter, word-by-word title, hero parallax
 document.addEventListener('DOMContentLoaded', function () {
   // Animated counters
   var cio = new IntersectionObserver(function (es) {
@@ -34,28 +34,43 @@ document.addEventListener('DOMContentLoaded', function () {
     })();
   }
 
-  // Hero parallax tooth
-  var tooth = document.querySelector('.tooth-float');
-  var hero = document.querySelector('.hero-3d');
-  if (tooth && hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    hero.addEventListener('mousemove', function (ev) {
-      var r = hero.getBoundingClientRect();
-      var x = (ev.clientX - r.left) / r.width - 0.5;
-      var y = (ev.clientY - r.top) / r.height - 0.5;
-      tooth.style.transform = 'translate(' + (x * 26) + 'px,' + (y * 20) + 'px) rotateY(' + (x * 14) + 'deg) rotateX(' + (-y * 10) + 'deg)';
-    });
-    hero.addEventListener('mouseleave', function () { tooth.style.transform = ''; });
+  // Hero background parallax on scroll
+  var heroBg = document.getElementById('hero-bg');
+  if (heroBg && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var y = Math.min(window.scrollY, 900);
+        heroBg.style.transform = 'translateY(' + (y * 0.22) + 'px)';
+        ticking = false;
+      });
+    }, { passive: true });
   }
 
-  // Word-by-word hero title
+  // Word-by-word hero title (keeps the highlight span inside)
   document.querySelectorAll('.words-anim').forEach(function (el) {
-    var text = el.textContent; el.textContent = '';
-    text.split(' ').forEach(function (w, i) {
-      var s = document.createElement('span');
-      s.className = 'word'; s.textContent = w;
-      s.style.animationDelay = (0.25 + i * 0.09) + 's';
-      el.appendChild(s); el.appendChild(document.createTextNode(' '));
+    var frag = document.createDocumentFragment();
+    Array.prototype.forEach.call(el.childNodes, function (node) {
+      if (node.nodeType === 3) { // text node
+        node.textContent.split(' ').forEach(function (w) {
+          if (!w) return;
+          var s = document.createElement('span');
+          s.className = 'word'; s.textContent = w;
+          frag.appendChild(s); frag.appendChild(document.createTextNode(' '));
+        });
+      } else if (node.nodeType === 1) {
+        node.classList.add('word');
+        frag.appendChild(node); frag.appendChild(document.createTextNode(' '));
+      }
+    });
+    el.innerHTML = '';
+    el.appendChild(frag);
+    var i = 0;
+    el.querySelectorAll('.word').forEach(function (w) {
+      w.style.animationDelay = (0.25 + i * 0.09) + 's';
+      i++;
     });
   });
-
 });
