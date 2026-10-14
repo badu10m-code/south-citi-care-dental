@@ -41,7 +41,7 @@ document.addEventListener('scc-admin-ready', function () {
 
       // day-wise register
       var byDay = {};
-      list.forEach(function (a) { var d = a.date || '?'; (byDay[d] = byDay[d] || { t: 0, c: 0, p: 0, x: 0 }); byDay[d].t++; byDay[d][a.status[0]] !== undefined && 0; byDay[d][a.status === 'confirmed' ? 'c' : a.status === 'completed' ? 'p' : a.status === 'cancelled' ? 'x' : 't']++; });
+      list.forEach(function (a) { var d = a.date || '?'; (byDay[d] = byDay[d] || { t: 0, c: 0, p: 0, x: 0 }); byDay[d].t++; if (a.status === 'confirmed') byDay[d].c++; else if (a.status === 'completed') byDay[d].p++; else if (a.status === 'cancelled') byDay[d].x++; });
       var days = Object.keys(byDay).sort().reverse().slice(0, 21);
       var tb = document.querySelector('#day-table tbody');
       tb.innerHTML = days.map(function (d) {
