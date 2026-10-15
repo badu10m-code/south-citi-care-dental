@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://southciticaredental.in/index.html</loc></url>
-  <url><loc>https://southciticaredental.in/services.html</loc></url>
-  <url><loc>https://southciticaredental.in/doctors.html</loc></url>
-  <url><loc>https://southciticaredental.in/gallery.html</loc></url>
-  <url><loc>https://southciticaredental.in/blog.html</loc></url>
-  <url><loc>https://southciticaredental.in/contact.html</loc></url>
-  <url><loc>https://southciticaredental.in/article-root-canal-kolkata.html</loc></url>
-  <url><loc>https://southciticaredental.in/article-child-first-dental-visit.html</loc></url>
-  <url><loc>https://southciticaredental.in/article-sensitive-teeth-causes.html</loc></url>
-  <url><loc>https://southciticaredental.in/article-teeth-whitening-guide.html</loc></url>
-  <url><loc>https://southciticaredental.in/article-implants-vs-bridges.html</loc></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/services.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/doctors.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/contact.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/privacy.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/blog/index.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/blog/root-canal-kolkata.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/blog/child-first-dental-visit.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/blog/sensitive-teeth-causes.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/blog/implants-vs-bridges.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://badu10m-code.github.io/south-citi-care-dental/blog/teeth-whitening-guide.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

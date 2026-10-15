@@ -3,62 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Admin Panel | South Citi Care Dental</title>
 <meta name="robots" content="noindex, nofollow">
-<title>Dashboard | South Citi Care Dental</title>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/admin.css?v=73">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .adm-tab{display:none}.adm-tab.active{display:block}
+</style>
 </head>
-<body class="admin-body" data-page="dashboard">
-<div id="auth-screen" class="auth-wrap">
-  <div class="auth-card">
-    <div class="auth-logo">S</div>
-    <div class="auth-brand"><h1>South Citi Care Dental</h1></div>
-    <p class="auth-sub">Staff access. Enter the owner's secret code.</p>
-    <form id="step-code" class="auth-step">
-      <label for="auth-code">Secret code</label>
-      <input id="auth-code" type="text" autocomplete="off" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
-      <button class="btn btn-block" id="btn-unlock" type="submit">Unlock panel</button>
-      <p class="error" id="err-code"></p>
-    </form>
-    <p class="auth-note">This code is known only to the clinic owner. The first correct entry locks the panel to this device, so no other device can register even with the code.</p>
-    <button class="forget" id="forget-device" type="button">Forget this device</button>
-  </div>
+<body class="admin">
+
+<div class="adm-banner">
+  <b>Demo notice:</b> this admin panel is open without any password, purely for demonstration purposes.
+  On the live clinic site, this panel will sit behind a secure owner-only login.
 </div>
-<div id="admin-panel" hidden>
-  <aside class="side-nav" id="side-nav"></aside>
-  <div class="admin-wrap">
-    <header class="topbar">
-      <div class="topbar-brand"><span class="topbar-logo">S</span><div><b>South Citi Care Dental</b><span id="page-sub"></span></div></div>
-      <div class="topbar-user"><span class="badge-owner">Owner</span><button class="btn btn-outline btn-sm" id="logout">Log out</button></div>
-    </header>
-    <main class="panel-main">
-<div class="stats">
-      <div class="stat"><b id="stat-total">0</b><span>Total appointments</span></div>
-      <div class="stat"><b id="stat-new">0</b><span>New, need call back</span></div>
-      <div class="stat"><b id="stat-confirmed">0</b><span>Confirmed</span></div>
-      <div class="stat"><b id="stat-today">0</b><span>Received today</span></div>
+
+<div class="adm-wrap">
+  <div class="adm-head">
+    <div>
+      <p class="kicker" style="margin-bottom:.3rem">South Citi Care Dental</p>
+      <h1>Owner dashboard</h1>
     </div>
-    <div class="grid-charts">
-      <div class="table-card chart-card"><h3>Bookings, last 14 days</h3><canvas id="ch-days" height="230"></canvas></div>
-      <div class="table-card chart-card"><h3>Status split</h3><canvas id="ch-status" height="230"></canvas></div>
-    </div>
-    <h3 class="sec-h">Received today</h3>
-    <div class="table-card"><div id="today-list"><p class="empty">Loading&hellip;</p></div></div>
-    <div class="quick-links">
-      <a class="btn" href="admin-appointments.html">All appointments</a>
-      <a class="btn btn-outline" href="admin-sales.html">Sales &amp; graphs</a>
-      <a class="btn btn-outline" href="admin-banners.html">Homepage banners</a>
-      <a class="btn btn-outline" href="admin-settings.html">Settings</a>
-      <a class="btn btn-outline" href="index.html" target="_blank" rel="noopener">View website</a>
-    </div>
-    </main>
+    <a class="backlink" href="index.html">← Back to website</a>
   </div>
+
+  <div class="adm-tabs" role="tablist">
+    <button class="active" data-tab="overview">Overview</button>
+    <button data-tab="appointments">Appointments</button>
+    <button data-tab="posts">Blog posts</button>
+    <button data-tab="clinic">Clinic info</button>
+    <button data-tab="settings">Settings</button>
+  </div>
+
+  <section class="adm-tab active" id="tab-overview">
+    <div class="stat-row">
+      <div><div class="v" id="st-new">3</div><div class="l">New requests</div></div>
+      <div><div class="v" id="st-week">11</div><div class="l">This week</div></div>
+      <div><div class="v" id="st-posts">5</div><div class="l">Blog posts live</div></div>
+      <div><div class="v">4.9</div><div class="l">Google rating</div></div>
+    </div>
+    <div class="demo-panel">
+      <h3>Today at a glance</h3>
+      <p id="ov-today">Loading…</p>
+    </div>
+    <div class="demo-panel">
+      <h3>Recent requests</h3>
+      <p id="ov-recent">Loading…</p>
+    </div>
+    <p class="adm-note">All data in this demo is stored in this browser only (localStorage). Nothing is sent to a server, which is why it is safe to demonstrate openly.</p>
+  </section>
+
+  <section class="adm-tab" id="tab-appointments">
+    <table class="adm-table">
+      <thead><tr><th>Patient</th><th>Phone</th><th>Treatment</th><th>Requested slot</th><th>Note</th><th>Status</th></tr></thead>
+      <tbody id="appt-body"></tbody>
+    </table>
+    <p class="adm-note">Click a status pill to cycle New → Confirmed → Cancelled. In the live version, confirmed patients get an automatic WhatsApp confirmation.</p>
+  </section>
+
+  <section class="adm-tab" id="tab-posts">
+    <div class="demo-panel">
+      <h3>Live on the site</h3>
+      <p id="posts-live">Loading…</p>
+    </div>
+    <div class="adm-form">
+      <h3 style="margin-bottom:1rem">Draft a new post (demo)</h3>
+      <form id="post-form">
+        <label for="p-title">Title</label>
+        <input id="p-title" type="text" placeholder="e.g. Why milk teeth matter" required>
+        <label for="p-cat">Category</label>
+        <select id="p-cat"><option>Root Canal</option><option>Dental Implants</option><option>Kids' Dentistry</option><option>Whitening</option><option>General</option></select>
+        <label for="p-body">Opening paragraph</label>
+        <textarea id="p-body" rows="4" placeholder="Start with the question patients actually ask..."></textarea>
+        <button class="btn" type="submit" style="width:auto">Save draft</button>
+      </form>
+    </div>
+    <p class="adm-note">Drafts are saved in this browser for the demo. On the live site, saving a post here publishes it to the blog section with one click.</p>
+  </section>
+
+  <section class="adm-tab" id="tab-clinic">
+    <div class="adm-form">
+      <h3 style="margin-bottom:1rem">Clinic details (demo)</h3>
+      <label for="cl-name">Clinic name</label><input id="cl-name" value="South Citi Care Dental Clinic">
+      <label for="cl-phone">Phone</label><input id="cl-phone" value="+91 99034 50487">
+      <label for="cl-hours">Hours</label><input id="cl-hours" value="Mon to Sat, 9:30 AM to 9:30 PM · Sunday by appointment">
+      <label for="cl-addr">Address</label><textarea id="cl-addr" rows="2">23B/40/1A, near PNB, Mani Aangan, Block B, New Alipore, Kolkata 700053</textarea>
+      <button class="btn" type="button" id="cl-save" style="width:auto">Save (demo)</button>
+      <p class="adm-note" id="cl-note" style="margin-top:1rem">Edits here update the demo only. On the live site, saved changes go live across every page instantly.</p>
+    </div>
+  </section>
+
+  <section class="adm-tab" id="tab-settings">
+    <div class="demo-panel">
+      <h3>WhatsApp confirmation</h3>
+      <p>On: every confirmed appointment sends the patient a WhatsApp message with their slot. (Demo reads the current setting only.)</p>
+    </div>
+    <div class="demo-panel">
+      <h3>Owner phone for OTP login</h3>
+      <p>•••• ••621. On the live site, the owner signs in with a one-time password sent to this number, so there is no password to forget or leak.</p>
+    </div>
+    <div class="demo-panel">
+      <h3>Data retention</h3>
+      <p>Appointment records are kept for 12 months, then purged automatically. Export to Excel available on the live site.</p>
+    </div>
+  </section>
 </div>
-<script src="config.js?v=73"></script>
-<script src="js/store.js?v=73"></script>
-<script src="js/auth.js?v=73"></script>
-<script src="js/admin-core.js?v=73"></script>
-<script src="js/admin-dashboard.js?v=73"></script>
+
+<script>
+(function(){
+  // tabs
+  document.querySelectorAll('.adm-tabs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.adm-tabs button').forEach(function(x){x.classList.remove('active')});
+      document.querySelectorAll('.adm-tab').forEach(function(x){x.classList.remove('active')});
+      b.classList.add('active');
+      document.getElementById('tab-'+b.dataset.tab).classList.add('active');
+    });
+  });
+
+  var seed=[
+    {name:'Rahul Sen',phone:'98300 41221',service:'Root canal',date:'2026-10-16',slot:'Morning',note:'Pain lower left since Monday',status:'new'},
+    {name:'Priyanka Das',phone:'98311 70045',service:'Kids\' dentistry',date:'2026-10-17',slot:'Afternoon',note:'First visit, 6-year-old',status:'new'},
+    {name:'Arnab Roy',phone:'90070 28834',service:'Emergency',date:'2026-10-15',slot:'Evening',note:'Broken front tooth',status:'conf'},
+    {name:'Meera Chatterjee',phone:'98301 52209',service:'Whitening',date:'2026-10-19',slot:'Morning',note:'',status:'conf'},
+    {name:'Sourav Ghosh',phone:'84200 91177',service:'Dental implant',date:'2026-10-20',slot:'Afternoon',note:'Asking about single tooth implant',status:'new'},
+    {name:'Ankita Bose',phone:'91236 44080',service:'General check-up',date:'2026-10-14',slot:'Evening',note:'',status:'cxl'}
+  ];
+  var list;
+  try{list=JSON.parse(localStorage.getItem('scc_appointments')||'[]')}catch(e){list=[]}
+  list=seed.concat(list);
+
+  function pill(a){
+    var map={new:['new','New'],conf:['conf','Confirmed'],cxl:['cxl','Cancelled']};
+    var m=map[a]||map.new;
+    return '<span class="pill '+m[0]+'" style="cursor:pointer">'+m[1]+'</span>';
+  }
+  var tb=document.getElementById('appt-body');
+  tb.innerHTML=list.map(function(a){
+    return '<tr><td><b>'+a.name+'</b></td><td>'+a.phone+'</td><td>'+a.service+'</td><td>'+a.date+' · '+a.slot+'</td><td>'+(a.note||'—')+'</td><td>'+pill(a.status)+'</td></tr>';
+  }).join('');
+  tb.querySelectorAll('.pill').forEach(function(p,i){
+    p.addEventListener('click',function(){
+      var order=['new','conf','cxl'];
+      list[i].status=order[(order.indexOf(list[i].status)+1)%3];
+      p.className='pill '+list[i].status;p.style.cursor='pointer';p.textContent=list[i].status==='new'?'New':list[i].status==='conf'?'Confirmed':'Cancelled';
+    });
+  });
+
+  // overview
+  var newc=list.filter(function(a){return a.status==='new'}).length;
+  document.getElementById('st-new').textContent=newc;
+  var wk=list.filter(function(a){return a.date>='2026-10-13'&&a.date<='2026-10-19'}).length;
+  document.getElementById('st-week').textContent=wk;
+  document.getElementById('ov-today').textContent='3 chairs booked across today and tomorrow, including one emergency (broken front tooth, this evening). '+newc+' new requests waiting for confirmation.';
+  var rec=list.slice(0,3).map(function(a){return a.name+' · '+a.service+' · '+a.date}).join('<br>');
+  document.getElementById('ov-recent').innerHTML=rec;
+
+  // posts
+  var live=['Root canal treatment: what it costs, whether it hurts, and what actually happens in the chair',
+    'Your child\'s first dental visit: when to go, and how to keep it from turning into a scene',
+    'That jolt from cold water: what sensitive teeth are telling you',
+    'A missing tooth: how implants and bridges compare, and which one fits which mouth',
+    'Teeth whitening: the options that work, the ones that waste money, and the stains that are permanent'];
+  document.getElementById('st-posts').textContent=live.length;
+  document.getElementById('posts-live').innerHTML=live.map(function(t){return '· '+t}).join('<br><br>');
+
+  // post form
+  document.getElementById('post-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var t=document.getElementById('p-title').value.trim();
+    if(!t)return;
+    try{
+      var d=JSON.parse(localStorage.getItem('scc_drafts')||'[]');d.push({title:t,cat:document.getElementById('p-cat').value,body:document.getElementById('p-body').value,ts:new Date().toISOString()});
+      localStorage.setItem('scc_drafts',JSON.stringify(d));
+    }catch(err){}
+    document.getElementById('p-title').value='';document.getElementById('p-body').value='';
+    document.getElementById('posts-live').innerHTML='<b>Draft saved:</b> '+t+'<br><br>'+document.getElementById('posts-live').innerHTML;
+  });
+
+  // clinic info save (demo)
+  document.getElementById('cl-save').addEventListener('click',function(){
+    document.getElementById('cl-note').textContent='Saved in this browser (demo). On the live site this updates every page instantly.';
+  });
+})();
+</script>
 </body>
 </html>

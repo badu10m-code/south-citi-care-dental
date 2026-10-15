@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /admin
+Disallow: /admin.html
 
-Sitemap: https://southciticaredental.in/sitemap.xml
+Sitemap: https://badu10m-code.github.io/south-citi-care-dental/sitemap.xml
