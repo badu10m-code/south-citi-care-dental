@@ -169,6 +169,7 @@ function donutChart(cv, items) {
     ['admin-appointments.html', 'Appointments', '▦'],
     ['admin-sales.html', 'Sales & graphs', '◔'],
     ['admin-banners.html', 'Banners', '▣'],
+    ['admin-posts.html', 'Blog posts', '✎'],
     ['admin-settings.html', 'Settings', '⚙']
   ];
   document.addEventListener('DOMContentLoaded', function () {

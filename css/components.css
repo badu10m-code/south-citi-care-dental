@@ -100,3 +100,6 @@ footer ul { list-style:none; line-height:2; }
 .checklist { list-style:none; }
 .checklist li { padding:8px 0 8px 34px; position:relative; font-size:.98rem; }
 .checklist li::before { content:"✓"; position:absolute; left:0; top:6px; width:24px; height:24px; border-radius:8px; background:linear-gradient(135deg,var(--primary),#38BDF8); color:#fff; display:grid; place-items:center; font-size:.8rem; font-weight:700; box-shadow:0 4px 10px rgba(14,165,233,.3); }
+
+.link-more { display: inline-block; margin-top: 10px; font-weight: 600; color: #0EA5E9; text-decoration: none; font-size: .92rem; }
+.link-more:hover { text-decoration: underline; }

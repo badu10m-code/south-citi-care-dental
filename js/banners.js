@@ -43,7 +43,7 @@
     var heroImg = document.getElementById('hero-img');
     if (!frame || !section) return;
     var cfg = (d && d.config) || {};
-    var vid = ytId(cfg.heroVideo);
+    var vid = ytId(cfg.heroVideo || 'XqKwE5-wdqw');
     if (heroImg && cfg.heroImage) heroImg.src = cfg.heroImage;
     var playing = false;
     var io = new IntersectionObserver(function (es) {
