@@ -413,3 +413,8 @@ body.admin-body { margin: 0; }
 .tgl { border: 0; border-radius: 999px; padding: 8px 16px; font: 600 .76rem Poppins, sans-serif; cursor: pointer; }
 .tgl.on { background: #D1FAE5; color: #065F46; }
 .tgl.off { background: #F1F5F9; color: #64748B; }
+
+/* blog posts editor */
+#post-title { width: 100%; max-width: 640px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #D5E5F2; border-radius: 10px; font: 500 14px 'Open Sans', sans-serif; }
+#post-body { width: 100%; max-width: 640px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #D5E5F2; border-radius: 10px; font: 500 14px 'Open Sans', sans-serif; margin-top: 10px; resize: vertical; }
+#post-title:focus, #post-body:focus { outline: 2px solid #0EA5E9; border-color: #0EA5E9; }
