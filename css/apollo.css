@@ -248,7 +248,7 @@ footer .footer-bottom { border-top-color: rgba(255,255,255,.15); }
 .ap-hero-doc-cap span { font-size: .8rem; color: #CDEDF5; }
 
 /* typeline (restored from the previous hero) */
-.typeline { font-size: 1.15rem; min-height: 1.8em; margin: 4px 0 18px; color: #CDEDF5; }
+.typeline { font-size: 1.15rem; min-height: 1.8em; margin: 16px 0 18px; color: #CDEDF5; }
 .typeline .type-label { font-weight: 600; color: #fff; }
 #typewriter { color: var(--ap-yellow); font-weight: 700; border-right: 2px solid var(--ap-yellow); padding-right: 3px; animation: caret .8s step-end infinite; }
 @keyframes caret { 50% { border-color: transparent; } }
