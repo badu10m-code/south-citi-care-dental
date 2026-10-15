@@ -46,7 +46,7 @@
 </head>
 <body>
 
-<link rel="stylesheet" href="css/apollo.css?v=71">
+<link rel="stylesheet" href="css/apollo.css?v=72">
 
 <div class="ap-topbar">
   <div class="container ap-topbar-in">
@@ -80,14 +80,18 @@
   <div class="container ap-hero-in">
     <div class="ap-hero-copy">
       <div class="ap-hero-badge"><span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span>4.9 on Google &middot; 62 patient reviews</div>
-      <h1>Healthy teeth, honest advice, <span class="type-target" data-phrase="zero fear"></span><span class="type-caret" id="type-caret"></span></h1>
+      <h1 class="words-anim">Healthy teeth, honest advice, <span class="hl">zero fear</span></h1>
+      <p class="typeline"><span class="type-label">New Alipore's clinic for</span> <span id="typewriter" data-words='["painless root canals","dental implants","smile makeovers","kids &amp; family dentistry"]'></span></p>
       <p>M.D.S specialists for root canals, implants and family dentistry in New Alipore, Kolkata. Every option explained, price agreed before anything begins.</p>
       <div class="ap-hero-cta">
         <a class="ap-btn" href="contact.html#book">Book an Appointment</a>
         <a class="ap-btn ap-btn-ghost" href="tel:+919903450487">Call +91 99034 50487</a>
       </div>
     </div>
-    <img class="ap-hero-doc" src="assets/doc-anish.png" alt="Dr. Anish Bharti, dental specialist at South Citi Care Dental Clinic">
+    <div class="ap-hero-doc-wrap">
+      <img class="ap-hero-doc" src="assets/doc-anish.png" alt="Dr. Anish Bharti, dental specialist at South Citi Care Dental Clinic">
+      <div class="ap-hero-doc-cap"><b>Dr. Anish Bharti</b><span>BDS, M.D.S (Prosthodontics &amp; Crown Bridge) &middot; 15+ years</span></div>
+    </div>
   </header>
 
 <section class="ap-quick">
@@ -203,9 +207,9 @@
     <h2 class="ap-h2 reveal">Our Blogs</h2>
     <p class="ap-sub reveal">Short, honest guides on the treatments and questions patients ask us most.</p>
     <div class="ap-blog">
-      <a class="ap-bcard reveal" href="article-root-canal-kolkata.html"><img src="assets/blog-rct.jpg" alt="Illustration of a root canal treatment"><div class="b-in"><h3>Root canal treatment: what it costs, whether it hurts, and what actually happens in the chair</h3><p>Costs, visits and honest answers before you sit in the chair.</p><div class="b-meta">14 Oct 2026 &middot; 5 min read</div><div class="b-more">Read more &rarr;</div></div></a>
-      <a class="ap-bcard reveal d1" href="article-child-first-dental-visit.html"><img src="assets/blog-kids.jpg" alt="Illustration of a child at the dentist"><div class="b-in"><h3>Your child's first dental visit: when to go, and how to keep it from turning into a scene</h3><p>The right age, what the first check-up covers, and what parents can do.</p><div class="b-meta">12 Oct 2026 &middot; 4 min read</div><div class="b-more">Read more &rarr;</div></div></a>
-      <a class="ap-bcard reveal d2" href="article-sensitive-teeth-causes.html"><img src="assets/blog-sensitivity.jpg" alt="Illustration of sensitive teeth"><div class="b-in"><h3>That jolt from cold water: what sensitive teeth are telling you</h3><p>Five common causes of sensitivity and which ones you can treat at home.</p><div class="b-meta">10 Oct 2026 &middot; 4 min read</div><div class="b-more">Read more &rarr;</div></div></a>
+      <a class="ap-bcard reveal" href="article-root-canal-kolkata.html"><img src="assets/dental-chair-card.jpg" alt=""><div class="b-in"><h3>Root canal treatment: what it costs, whether it hurts, and what actually happens in the chair</h3><p>Costs, visits and honest answers before you sit in the chair.</p><div class="b-meta">14 Oct 2026 &middot; 5 min read</div><div class="b-more">Read more &rarr;</div></div></a>
+      <a class="ap-bcard reveal d1" href="article-child-first-dental-visit.html"><img src="assets/svc-kids-card.jpg" alt=""><div class="b-in"><h3>Your child's first dental visit: when to go, and how to keep it from turning into a scene</h3><p>The right age, what the first check-up covers, and what parents can do.</p><div class="b-meta">12 Oct 2026 &middot; 4 min read</div><div class="b-more">Read more &rarr;</div></div></a>
+      <a class="ap-bcard reveal d2" href="article-sensitive-teeth-causes.html"><img src="assets/svc-filling-card.jpg" alt=""><div class="b-in"><h3>That jolt from cold water: what sensitive teeth are telling you</h3><p>Five common causes of sensitivity and which ones you can treat at home.</p><div class="b-meta">10 Oct 2026 &middot; 4 min read</div><div class="b-more">Read more &rarr;</div></div></a>
     </div>
     <div class="ap-center-btn"><a class="ap-btn" href="blog.html" style="background:var(--ap-teal-dark)">View All Articles</a></div>
   </div>
@@ -261,10 +265,11 @@
 </a>
 <a class="ap-side-tab" href="contact.html#book">Book Appointment</a>
 
-<script src="config.js?v=71"></script>
-<script src="js/store.js?v=71"></script>
-<script src="js/main.js?v=71"></script>
-<script src="js/banners.js?v=71"></script>
-<script src="js/apollo.js?v=71"></script>
+<script src="config.js?v=72"></script>
+<script src="js/store.js?v=72"></script>
+<script src="js/main.js?v=72"></script>
+<script src="js/banners.js?v=72"></script>
+<script src="js/animations.js?v=72"></script>
+<script src="js/apollo.js?v=72"></script>
 </body>
 </html>

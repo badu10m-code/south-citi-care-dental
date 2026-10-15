@@ -1,5 +1,26 @@
 // banners.js: homepage banner strip + clinic video section, both driven by the cloud config
 (function () {
+  function esc(t) {
+    return String(t || '').replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function bannerHTML(bn) {
+    var inner;
+    if (bn.image) {
+      inner = '<img class="banner-img" src="' + esc(bn.image) + '" alt="' + esc(bn.heading || 'Offer') + '">';
+    } else {
+      inner = '<div class="banner-tpl tpl-' + esc(bn.tpl || 'plain') + '">' +
+        (bn.badge ? '<span class="badge">' + esc(bn.badge) + '</span>' : '') +
+        '<h3>' + esc(bn.heading || '') + '</h3>' +
+        (bn.sub ? '<p>' + esc(bn.sub) + '</p>' : '') +
+        '<a class="cta" href="' + esc(bn.link || 'contact.html#book') + '">' + esc(bn.cta || 'Book now') + '</a>' +
+        '</div>';
+    }
+    return '<div class="banner-slide">' + inner + '</div>';
+  }
+
   function activeBanners(d) {
     var cfg = (d && d.config) || {};
     return (cfg.banners || []).filter(function (b) { return b && b.active !== false; });

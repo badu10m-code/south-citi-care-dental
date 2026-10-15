@@ -203,7 +203,7 @@ footer .footer-bottom { border-top-color: rgba(255,255,255,.15); }
 /* ---------- v71 additions: hero split, banners, doc photos, thumbs, typewriter ---------- */
 .ap-hero-in { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 30px; max-width: 100%; padding: 46px 0 40px; }
 .ap-hero-copy { max-width: 620px; }
-.ap-hero-doc { justify-self: end; align-self: end; height: 400px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 18px 30px rgba(0,0,0,.35)); }
+.ap-hero-doc { align-self: end; height: 400px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 18px 30px rgba(0,0,0,.35)); }
 .ap-doc-ava img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: top; }
 
 /* banner strip (restored) */
@@ -239,4 +239,36 @@ footer .footer-bottom { border-top-color: rgba(255,255,255,.15); }
   .ap-hero-in { grid-template-columns: 1fr; padding-top: 40px; }
   .ap-hero-doc { height: 240px; margin: 10px auto 0; }
   .post-list .li-thumb { width: 84px; height: 64px; }
+}
+
+/* ---------- v72 fixes ---------- */
+.ap-hero-doc-wrap { justify-self: end; text-align: center; }
+.ap-hero-doc-cap { margin-top: 10px; color: #fff; }
+.ap-hero-doc-cap b { display: block; font-family: 'Roboto', sans-serif; font-size: 1.05rem; }
+.ap-hero-doc-cap span { font-size: .8rem; color: #CDEDF5; }
+
+/* typeline (restored from the previous hero) */
+.typeline { font-size: 1.15rem; min-height: 1.8em; margin: 4px 0 18px; color: #CDEDF5; }
+.typeline .type-label { font-weight: 600; color: #fff; }
+#typewriter { color: var(--ap-yellow); font-weight: 700; border-right: 2px solid var(--ap-yellow); padding-right: 3px; animation: caret .8s step-end infinite; }
+@keyframes caret { 50% { border-color: transparent; } }
+
+/* word-by-word hero title */
+.words-anim .word { display: inline-block; opacity: 0; transform: translateY(26px) rotateX(50deg); animation: wordUp .65s cubic-bezier(.2,.7,.3,1) forwards; }
+@keyframes wordUp { to { opacity: 1; transform: none; } }
+.ap-hero h1 .hl { color: var(--ap-yellow); }
+
+/* bigger stat numbers */
+.ap-stat b { font-size: 2.4rem !important; }
+.ap-stat { padding: 30px 12px; }
+
+/* female doctor avatar framing */
+.ap-doc-ava img[src*="doc-aditi"] { object-position: center 22%; }
+
+/* banner template variants */
+.banner-tpl.tpl-festive { background: linear-gradient(135deg, #9A2C13 0%, #D95F12 55%, #F37121 100%); }
+.banner-tpl.tpl-plain { background: linear-gradient(135deg, #0E6279 0%, #137B9A 55%, #35A8C4 100%); }
+
+@media (max-width: 760px) {
+  .ap-hero-doc-wrap { justify-self: center; }
 }
