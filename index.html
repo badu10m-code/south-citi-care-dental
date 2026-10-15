@@ -13,11 +13,11 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css?v=65">
 <link rel="stylesheet" href="css/components.css?v=65">
 <link rel="stylesheet" href="css/home.css?v=66"
-<link rel="stylesheet" href="css/blog.css?v=66">>
+>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -46,265 +46,223 @@
 </head>
 <body>
 
-<nav class="nav">
-  <div class="container nav-inner">
-    <a class="brand" href="index.html"><span class="brand-badge"><img src="assets/tooth-3d.png" alt=""></span> South Citi Care Dental</a>
-    <div class="nav-links">
+<link rel="stylesheet" href="css/apollo.css?v=70">
+
+<div class="ap-topbar">
+  <div class="container ap-topbar-in">
+    <span class="ap-hours">Mon to Sat, 9:30 AM to 9:30 PM &middot; Sunday by appointment</span>
+    <div class="ap-top-actions">
+      <a href="https://wa.me/919903450487" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="tel:+919903450487">&#128222; +91 99034 50487</a>
+    </div>
+  </div>
+</div>
+
+<nav class="ap-nav">
+  <div class="container ap-nav-in">
+    <a class="ap-brand" href="index.html"><span class="ap-badge"><img src="assets/tooth-3d.png" alt=""></span>South Citi Care Dental</a>
+    <button class="nav-burger" aria-label="Menu">&#9776;</button>
+    <div class="ap-links">
       <a href="index.html" class="active">Home</a>
       <a href="services.html">Services</a>
       <a href="doctors.html">Our Doctors</a>
       <a href="gallery.html">Gallery</a>
       <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
-      <a class="btn btn-sm" href="contact.html#book">Book Appointment</a>
+      <a class="ap-cta" href="contact.html#book">Book Appointment</a>
     </div>
-    <button class="nav-burger" aria-label="Menu">☰</button>
   </div>
 </nav>
 
-<header class="hero-media" id="top">
-  <div class="hero-bg" id="hero-bg">
-    <img id="hero-img" src="assets/dental-chair.jpg" alt="Treatment room at South Citi Care Dental Clinic">
-  </div>
-  <div class="hero-shade"></div>
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <div class="hero-badge"><span class="star">★★★★★</span> 4.9 on Google · 62 patient reviews</div>
-      <h1 class="words-anim">Healthy teeth, honest advice, <span class="hl">zero fear</span></h1>
-      <p class="typeline"><span class="type-label">New Alipore's clinic for</span> <span id="typewriter" data-words='["painless root canals","dental implants","smile makeovers","kids &amp; family dentistry"]'></span></p>
-      <div class="hero-cta">
-        <a class="btn" href="contact.html#book">Book an Appointment</a>
-        <a class="btn btn-outline" href="tel:+919903450487">Call +91 99034 50487</a>
-      </div>
-      <div class="hero-facts">
-        <div class="fact"><b><span data-count="15">0</span>+</b><span>Years of experience</span></div>
-        <div class="fact"><b><span data-count="4.9" data-decimals="1">0</span></b><span>Google rating</span></div>
-        <div class="fact"><b><span data-count="62">0</span></b><span>Patient reviews</span></div>
-        <div class="fact"><b><span data-count="6">0</span></b><span>Days a week open</span></div>
-      </div>
-    </div>
-    <div class="hero-cards">
-      <div class="hero-quote">
-        <span class="q-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        <p>&ldquo;Fully painless treatment. Doctor, his assistant and the other personnel are very friendly.&rdquo;</p>
-        <div class="q-who">Shyama Prasad D. <span>&middot; Google review</span></div>
-      </div>
-      <div class="hero-hours">M.D.S specialists on every case &middot; Mon to Sat, 9:30 AM to 9:30 PM &middot; Sunday by appointment</div>
+<header class="ap-hero" id="top">
+  <div class="hero-bg"><img id="hero-img" src="assets/dental-chair.jpg" alt="Treatment room at South Citi Care Dental Clinic"></div>
+  <div class="ap-hero-shade"></div>
+  <div class="container ap-hero-in">
+    <div class="ap-hero-badge"><span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span>4.9 on Google &middot; 62 patient reviews</div>
+    <h1>Healthy teeth, honest advice, <span>zero fear</span></h1>
+    <p>M.D.S specialists for root canals, implants and family dentistry in New Alipore, Kolkata. Every option explained, price agreed before anything begins.</p>
+    <div class="ap-hero-cta">
+      <a class="ap-btn" href="contact.html#book">Book an Appointment</a>
+      <a class="ap-btn ap-btn-ghost" href="tel:+919903450487">Call +91 99034 50487</a>
     </div>
   </div>
-  <div class="hero-cue" aria-hidden="true"><span></span></div>
 </header>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>🦷 Root Canal (Single Sitting)</span><span>✨ Teeth Whitening</span><span>⚙️ Dental Implants</span><span>👑 Crowns &amp; Bridges</span><span>🧒 Family Dentistry</span><span>🪥 Gum Care</span>
-    <span>🦷 Root Canal (Single Sitting)</span><span>✨ Teeth Whitening</span><span>⚙️ Dental Implants</span><span>👑 Crowns &amp; Bridges</span><span>🧒 Family Dentistry</span><span>🪥 Gum Care</span>
+<section class="ap-quick">
+  <div class="container ap-quick-in">
+    <a href="https://maps.google.com/?cid=3090220167103892671" target="_blank" rel="noopener">
+      <div class="ap-q"><span class="ap-q-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 21s-7-5.6-7-11a7 7 0 1 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span><div><h3>Locate the Clinic</h3><span>23B/40/1A, near PNB, New Alipore</span><span class="go">Open in Google Maps &rarr;</span></div></div>
+    </a>
+    <a href="contact.html#book">
+      <div class="ap-q"><span class="ap-q-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></span><div><h3>Book an Appointment</h3><span>Walk in or book online</span><span class="go">Book now &rarr;</span></div></div>
+    </a>
+    <a href="tel:+919903450487">
+      <div class="ap-q"><span class="ap-q-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><div><h3>Call the Clinic</h3><span>We answer during clinic hours</span><span class="go">+91 99034 50487 &rarr;</span></div></div>
+    </a>
   </div>
-</div>
+</section>
 
 <section id="offer-strip" hidden>
   <div class="container">
-    <div class="banner-stage">
-      <div id="banner-slides"></div>
-    </div>
+    <div class="banner-stage"><div id="banner-slides"></div></div>
     <div class="banner-dots" id="banner-dots"></div>
   </div>
 </section>
 
-<section id="services-teaser">
-  <div class="container center">
-    <span class="section-tag reveal">What we treat</span>
-    <h2 class="section-title reveal">Complete dental care under one roof</h2>
-    <p class="section-sub reveal">A clear diagnosis, every option explained, and the price before anything begins.</p>
-    <div class="blog-list">
-      <div class="svc-feat reveal">
-        <img src="assets/dental-chair-card.jpg" alt="Treatment room where single-sitting root canals are done">
-        <div>
-          <div class="p-meta"><b>Most asked for</b> &middot; usually one visit</div>
-          <h3>Root Canal (Single Sitting)</h3>
-          <p>Modern, painless RCT that saves your natural tooth. Most cases finish in one visit, and you walk out with the tooth still in your mouth.</p>
-          <a class="p-more" href="services.html">Details and what it costs &rarr;</a>
-        </div>
-      </div>
-      <ul class="post-list">
-        <li class="reveal"><h3>Dental Implants</h3><p class="excerpt">Permanent tooth replacement by a certified implantologist, including full-mouth cases.</p></li>
-        <li class="reveal"><h3>Crowns &amp; Bridges</h3><p class="excerpt">Strong, natural-looking caps and bridges made by an M.D.S prosthodontist to match your bite.</p></li>
-        <li class="reveal"><h3>Cosmetic &amp; Laser Dentistry</h3><p class="excerpt">Whitening, smile design and laser treatments: quicker and gentler than conventional methods.</p></li>
-        <li class="reveal"><h3>Fillings &amp; Gum Care</h3><p class="excerpt">Tooth-coloured fillings, deep cleaning and gum surgery with a light hand and clear instructions.</p></li>
-        <li class="reveal"><h3>General &amp; Family Dentistry</h3><p class="excerpt">Check-ups, extractions and preventive care for every age. Kids included, patience guaranteed.</p></li>
-      </ul>
-    </div>
-    <br><a class="btn btn-outline reveal" href="services.html">See all services in detail</a>
-  </div>
-</section>
-
-<section id="dentists" style="background:linear-gradient(180deg,#fff 0%,var(--bg) 100%)">
-  <div class="container center">
-    <span class="section-tag reveal">Who treats you</span>
-    <h2 class="section-title reveal">Meet the dentists</h2>
-    <p class="section-sub reveal">M.D.S-qualified specialists who explain everything before they touch anything.</p>
-    <div class="doc-duo">
-      <div class="reveal">
-        <div class="doc-row">
-          <div class="doc-avatar">A</div>
-          <div>
-            <h3>Dr. Anish Bharti</h3>
-            <div class="cred">BDS, M.D.S (Prosthodontics &amp; Crown Bridge) &middot; Implantologist &middot; 15+ years</div>
-          </div>
-        </div>
-        <p style="color:#5B6B7C;line-height:1.65;margin-top:14px">Trained at Dr. R. Ahmed Dental College, Kolkata. Known for painless root canals, implants and for walking every patient through the options first. Winner at the 17th IPS PG Convention.</p>
-      </div>
-      <div class="reveal d1">
-        <div class="doc-row">
-          <div class="doc-avatar">A</div>
-          <div>
-            <h3>Dr. Aditi Bharti</h3>
-            <div class="cred">BDS &middot; 14 years of experience</div>
-          </div>
-        </div>
-        <p style="color:#5B6B7C;line-height:1.65;margin-top:14px">Handles extractions, implants and dentures with the calm that patients keep mentioning in their reviews. A familiar, trusted name in New Alipore.</p>
-      </div>
-    </div>
-    <br><a class="btn btn-outline reveal" href="doctors.html">More about our doctors</a>
-  </div>
-</section>
-
-<section id="clinic">
+<section class="ap-section" id="ap-specialties">
   <div class="container">
-    <div class="grid-2" style="align-items:center">
-      <div>
-        <span class="section-tag reveal">The clinic</span>
-        <h2 class="section-title reveal">A neighbourhood clinic with specialist standards</h2>
-        <p class="section-sub reveal" style="margin-bottom:20px">South Citi Care has treated New Alipore's smiles for over a decade, from a child's first check-up to full-mouth rehabilitation.</p>
-        <ul class="checklist">
-          <li class="reveal">M.D.S specialists on every case</li>
-          <li class="reveal d1">Sterilised instruments, single-use disposables</li>
-          <li class="reveal d2">Wheelchair accessible, cards and UPI accepted</li>
-          <li class="reveal d3">Award-winning team: 17th IPS PG Convention winners</li>
-        </ul>
+    <h2 class="ap-h2 reveal">Our Specialities</h2>
+    <p class="ap-sub reveal">From single-sitting root canals to full-mouth implants, all under one roof in New Alipore.</p>
+    <div class="ap-row-wrap">
+      <button class="ap-arrow prev" type="button" aria-label="Previous">&#8592;</button>
+      <div class="ap-row" data-aprow>
+        <a class="ap-scard reveal" href="services.html"><img src="assets/dental-chair-card.jpg" alt="Root canal treatment room"><span>Root Canal (Single Sitting)</span></a>
+        <a class="ap-scard reveal d1" href="services.html"><img src="assets/doctor-patient-card.jpg" alt="Dental implant procedure"><span>Dental Implants</span></a>
+        <a class="ap-scard reveal d2" href="services.html"><img src="assets/clinic-desk-card.jpg" alt="Crown and bridge consultation"><span>Crowns &amp; Bridges</span></a>
+        <a class="ap-scard reveal" href="services.html"><img src="assets/svc-whitening-card.jpg" alt="Bright smile after whitening"><span>Teeth Whitening &amp; Smile Design</span></a>
+        <a class="ap-scard reveal d1" href="services.html"><img src="assets/svc-filling-card.jpg" alt="Tooth-coloured filling"><span>Fillings &amp; Gum Treatment</span></a>
+        <a class="ap-scard reveal d2" href="services.html"><img src="assets/svc-kids-card.jpg" alt="Child in a dental chair"><span>Extractions &amp; Family Care</span></a>
+        <a class="ap-scard reveal" href="services.html"><img src="assets/svc-laser-card.jpg" alt="Dental laser equipment"><span>Laser Dentistry</span></a>
+        <a class="ap-scard reveal d1" href="services.html"><img src="assets/svc-braces-card.jpg" alt="Smile with clear aligner"><span>Braces &amp; Aligners</span></a>
+        <a class="ap-scard reveal d2" href="services.html"><img src="assets/svc-emergency-card.jpg" alt="Emergency dental examination"><span>Dental Emergencies</span></a>
       </div>
-      <div class="reveal d1" data-tilt style="border-radius:24px">
-        <div class="tilt-glare" style="border-radius:24px"></div>
-        <img src="assets/storefront-card.jpg" alt="South Citi Care Dental Clinic, New Alipore" style="border-radius:24px; box-shadow:var(--shadow-lift)">
+      <button class="ap-arrow next" type="button" aria-label="Next">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<section class="ap-section ap-tint">
+  <div class="container">
+    <h2 class="ap-h2 reveal">Our Doctors</h2>
+    <p class="ap-sub reveal">Both trained at Kolkata's Dr. R. Ahmed Dental College, practising together in New Alipore.</p>
+    <div class="ap-docs">
+      <div class="ap-doc reveal">
+        <div class="ap-doc-ava">A</div>
+        <h3>Dr. Anish Bharti</h3>
+        <div class="cred">BDS, M.D.S (Prosthodontics &amp; Crown Bridge) &middot; Certificate in Dental Implantology</div>
+        <div class="exp">15+ years experience</div>
+        <p>Known for painless root canals and for walking every patient through the options before starting. Winner at the 17th IPS PG Convention.</p>
+        <a class="ap-btn" href="contact.html#book">Book Appointment</a>
+      </div>
+      <div class="ap-doc reveal d1">
+        <div class="ap-doc-ava">A</div>
+        <h3>Dr. Aditi Bharti</h3>
+        <div class="cred">BDS</div>
+        <div class="exp">14 years experience</div>
+        <p>Handles extractions, implants and dentures with the calm that patients keep mentioning in their reviews.</p>
+        <a class="ap-btn" href="contact.html#book">Book Appointment</a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="reviews">
-  <div class="container center">
-    <span class="section-tag reveal">Patient stories</span>
-    <h2 class="section-title reveal">4.9 stars, in their own words</h2>
-    <p class="section-sub reveal">Real reviews from the clinic's Google listing.</p>
-    <div class="quote-feat reveal">
-      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <blockquote>&ldquo;Dr. Anish Bharti is an excellent dentist with great expertise in Root Canal Treatment. His professional approach, patience, and attention to detail made the entire procedure smooth and comfortable.&rdquo;</blockquote>
-      <div class="who">Kshetrajit G. M.</div>
-      <div class="src">Google review &middot; 5 stars</div>
+<section class="ap-section">
+  <div class="container ap-about">
+    <h2 class="ap-h2 reveal">About South Citi Care Dental</h2>
+    <p class="reveal">A neighbourhood clinic in New Alipore run by Dr. Anish Bharti and Dr. Aditi Bharti. Every visit starts with a proper diagnosis, a clear explanation of your options and the price before anything begins. Sterilised instruments, single-use disposables, wheelchair accessible, and cards, UPI, Paytm and GPay accepted.</p>
+    <div class="ap-stats">
+      <div class="ap-stat reveal"><b><span data-count="15">0</span>+</b><span>Years of experience</span></div>
+      <div class="ap-stat reveal d1"><b><span data-count="4.9" data-decimals="1">0</span></b><span>Google rating</span></div>
+      <div class="ap-stat reveal d2"><b><span data-count="62">0</span></b><span>Patient reviews</span></div>
+      <div class="ap-stat reveal d3"><b><span data-count="6">0</span></b><span>Days a week open</span></div>
     </div>
-    <div class="qpair">
-      <div class="reveal d1">
-        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>&ldquo;He did RCT &amp; crowning of my teeth with high excellency, which was a fully painless treatment. Doctor, his assistant and other personnel are very friendly.&rdquo;</p>
-        <div class="who">Shyama Prasad D.</div>
-        <div class="src">Google review &middot; 5 stars</div>
-      </div>
-      <div class="reveal d2">
-        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>&ldquo;They will inspect, find multiple solutions, make you understand the problem, provide necessary solutions and finally solve the issue with utmost care and professionalism.&rdquo;</p>
-        <div class="who">Saptarshi D.</div>
-        <div class="src">Google review &middot; 5 stars</div>
-      </div>
-    </div>
-    </div>
+  </div>
 </section>
 
-<section id="clinic-video">
-  <div class="container center">
-    <span class="section-tag reveal">Inside the clinic</span>
-    <h2 class="section-title reveal">A look around the clinic</h2>
-    <p class="section-sub reveal">A quick peek at the team and the treatment rooms in action.</p>
+<section class="ap-section ap-tint" id="clinic-video">
+  <div class="container">
+    <h2 class="ap-h2 reveal">A look around the clinic</h2>
+    <p class="ap-sub reveal">A quick peek at the team and the treatment rooms in action.</p>
     <div class="video-shell reveal" id="video-shell">
       <div class="video-frame" id="video-frame"></div>
-      <div class="video-vignette"></div>
       <div class="video-poster" id="video-poster"><img src="assets/clinic-desk.jpg" alt="Inside South Citi Care Dental Clinic"></div>
     </div>
   </div>
 </section>
 
-<section style="padding-top:0">
+<section class="ap-section">
   <div class="container">
-    <div class="cta-strip reveal">
-      <div><h2>Tooth bothering you since days?</h2><p>Same-day appointments usually available. Walk in or book online.</p></div>
-      <a class="btn btn-accent" href="contact.html#book">Book an Appointment</a>
+    <h2 class="ap-h2 reveal">Our Patients Speak</h2>
+    <p class="ap-sub reveal">Real reviews from the clinic's Google listing.</p>
+    <div class="ap-row-wrap">
+      <button class="ap-arrow prev" type="button" aria-label="Previous">&#8592;</button>
+      <div class="ap-quotes" data-aprow>
+        <div class="ap-quote reveal"><div class="q-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;Dr. Anish Bharti is an excellent dentist with great expertise in Root Canal Treatment. His professional approach, patience, and attention to detail made the entire procedure smooth and comfortable.&rdquo;</p><div class="who">Kshetrajit G. M.</div><div class="src">Google review &middot; 5 stars</div></div>
+        <div class="ap-quote reveal d1"><div class="q-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;He did RCT &amp; crowning of my teeth with high excellency, which was a fully painless treatment. Doctor, his assistant and other personnel are very friendly.&rdquo;</p><div class="who">Shyama Prasad D.</div><div class="src">Google review &middot; 5 stars</div></div>
+        <div class="ap-quote reveal d2"><div class="q-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;They will inspect, find multiple solutions, make you understand the problem, provide necessary solutions and finally solve the issue with utmost care and professionalism.&rdquo;</p><div class="who">Saptarshi D.</div><div class="src">Google review &middot; 5 stars</div></div>
+      </div>
+      <button class="ap-arrow next" type="button" aria-label="Next">&#8594;</button>
     </div>
   </div>
 </section>
 
-<section id="blog-teaser">
+<section class="ap-section ap-tint">
   <div class="container">
-    <span class="section-tag reveal">From our dentists</span>
-    <h2 class="section-title reveal">Health guides, written in plain language</h2>
-    <p class="section-sub reveal">Short, honest guides on the treatments and questions patients ask us most.</p>
-    <div class="blog-list teaser-list">
-      <ul class="post-list">
-        <li class="reveal">
-          <p class="p-meta"><b>Root canal</b> &middot; 5 min read</p>
-          <h3><a href="article-root-canal-kolkata.html">Root canal treatment: what it costs, whether it hurts, and what actually happens in the chair</a></h3>
-        </li>
-        <li class="reveal">
-          <p class="p-meta"><b>Kids' dentistry</b> &middot; 4 min read</p>
-          <h3><a href="article-child-first-dental-visit.html">Your child's first dental visit: when to go, and how to keep it from turning into a scene</a></h3>
-        </li>
-        <li class="reveal">
-          <p class="p-meta"><b>Oral health</b> &middot; 4 min read</p>
-          <h3><a href="article-sensitive-teeth-causes.html">That jolt from cold water: what sensitive teeth are telling you</a></h3>
-        </li>
+    <h2 class="ap-h2 reveal">Our Blogs</h2>
+    <p class="ap-sub reveal">Short, honest guides on the treatments and questions patients ask us most.</p>
+    <div class="ap-blog">
+      <a class="ap-bcard reveal" href="article-root-canal-kolkata.html"><img src="assets/dental-chair-card.jpg" alt=""><div class="b-in"><h3>Root canal treatment: what it costs, whether it hurts, and what actually happens in the chair</h3><p>Costs, visits and honest answers before you sit in the chair.</p><div class="b-meta">14 Oct 2026 &middot; 5 min read</div><div class="b-more">Read more &rarr;</div></div></a>
+      <a class="ap-bcard reveal d1" href="article-child-first-dental-visit.html"><img src="assets/svc-kids-card.jpg" alt=""><div class="b-in"><h3>Your child's first dental visit: when to go, and how to keep it from turning into a scene</h3><p>The right age, what the first check-up covers, and what parents can do.</p><div class="b-meta">12 Oct 2026 &middot; 4 min read</div><div class="b-more">Read more &rarr;</div></div></a>
+      <a class="ap-bcard reveal d2" href="article-sensitive-teeth-causes.html"><img src="assets/svc-filling-card.jpg" alt=""><div class="b-in"><h3>That jolt from cold water: what sensitive teeth are telling you</h3><p>Five common causes of sensitivity and which ones you can treat at home.</p><div class="b-meta">10 Oct 2026 &middot; 4 min read</div><div class="b-more">Read more &rarr;</div></div></a>
+    </div>
+    <div class="ap-center-btn"><a class="ap-btn" href="blog.html" style="background:var(--ap-teal-dark)">View All Articles</a></div>
+  </div>
+</section>
+
+<footer class="ap-footer">
+  <div class="container ap-footer-in">
+    <div>
+      <div class="f-brand"><span class="ap-badge"><img src="assets/tooth-3d.png" alt=""></span>South Citi Care Dental</div>
+      <p>Speciality dental care in New Alipore, Kolkata, by M.D.S-qualified dentists. Root canals, implants, cosmetic dentistry and complete family care.</p>
+      <p>Mon to Sat, 9:30 AM to 9:30 PM<br>Sunday by appointment</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="doctors.html">Our Doctors</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
+    <div>
+      <h4>Our Services</h4>
+      <ul>
+        <li><a href="services.html">Root Canal (Single Sitting)</a></li>
+        <li><a href="services.html">Dental Implants</a></li>
+        <li><a href="services.html">Crowns &amp; Bridges</a></li>
+        <li><a href="services.html">Teeth Whitening &amp; Smile Design</a></li>
+        <li><a href="services.html">Fillings &amp; Gum Treatment</a></li>
+        <li><a href="services.html">Dental Emergencies</a></li>
+      </ul>
     </div>
-    <p class="reveal" style="text-align:center;margin-top:26px"><a class="btn btn-outline" href="blog.html">See all guides</a></p>
+    <div>
+      <h4>Contact Us</h4>
+      <p>23B/40/1A, near PNB, Mani Aangan, Block B, New Alipore, Kolkata 700053</p>
+      <p><a href="tel:+919903450487">&#128222; +91 99034 50487</a></p>
+      <p><a href="https://wa.me/919903450487" target="_blank" rel="noopener">WhatsApp the clinic</a></p>
+      <p><a href="https://maps.google.com/?cid=3090220167103892671" target="_blank" rel="noopener">Find us on Google Maps</a></p>
+    </div>
   </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h4>South Citi Care Dental Clinic</h4>
-        <p>Speciality dental care in New Alipore, Kolkata. Multi-disciplinary treatments by M.D.S-qualified dentists.</p>
-      </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="doctors.html">Our Doctors</a></li>
-          <li><a href="gallery.html">Clinic Gallery</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Visit</h4>
-        <p>23B/40/1A, near PNB, Mani Aangan, Block B, New Alipore, Kolkata 700053<br>Mon-Sat 9:30 AM - 9:30 PM</p>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+919903450487">+91 99034 50487</a></li>
-          <li><a href="https://wa.me/919903450487" target="_blank" rel="noopener">WhatsApp</a></li>
-          <li><a href="https://maps.google.com/?cid=3090220167103892671" target="_blank" rel="noopener">Google Maps</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span class="fyear">2026</span> South Citi Care Dental Clinic</span>
-      <span><a href="admin.html">Staff login</a></span>
+  <div class="ap-footer-bottom">
+    <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <span>&copy; <span class="fyear">2026</span> South Citi Care Dental Clinic. All Rights Reserved.</span>
+      <a href="admin.html">Staff login</a>
     </div>
   </div>
 </footer>
-<script src="config.js?v=65"></script>
-<script src="js/main.js?v=65"></script>
-<script src="js/tilt.js?v=65"></script><script src="js/animations.js?v=65"></script>
-<script src="js/store.js?v=65"></script>
-<script src="js/banner-templates.js?v=65"></script><script src="js/banners.js?v=65"></script>
+
+<a class="ap-float-wa" href="https://wa.me/919903450487" target="_blank" rel="noopener" aria-label="WhatsApp the clinic">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.2.4 2.5.6 3.8.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22c-1.2 0-2.4-.2-3.5-.6l-.8-.3-4.9 1 1-4.7-.3-.8A9.9 9.9 0 0 1 6.1 15C6.1 9.5 10.5 5 16 5s9.9 4.5 9.9 10S21.5 25 16 25zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.7-.4z"/></svg>
+</a>
+<a class="ap-side-tab" href="contact.html#book">Book Appointment</a>
+
+<script src="config.js?v=70"></script>
+<script src="js/store.js?v=70"></script>
+<script src="js/main.js?v=70"></script>
+<script src="js/banners.js?v=70"></script>
+<script src="js/apollo.js?v=70"></script>
 </body>
 </html>

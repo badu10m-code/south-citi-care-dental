@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var burger = document.querySelector('.nav-burger');
   if (burger) {
     burger.addEventListener('click', function () {
-      document.querySelector('.nav-links').classList.toggle('open');
+      var nl = document.querySelector('.nav-links'); if (nl) nl.classList.toggle('open');
       burger.classList.toggle('active');
     });
   }
